@@ -23,6 +23,10 @@ public class CadastroDeClientes {
         }
         return false;
     }
+    
+    public void mostrarPontos(Cliente cliente) {
+        cliente.mostrarPontos();
+    }
 
     public void cadastrarCliente(Cliente cliente) {
         if (checaEmail(cliente)) {
@@ -63,4 +67,9 @@ public class CadastroDeClientes {
         }
         System.out.println("Cliente não encontrado");
     }
+    
+    public void mostrarDadosCliente(Cliente cliente) {
+        cliente.mostrarDados();
+    }
+
 }

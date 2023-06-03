@@ -5,14 +5,19 @@ public abstract class Produto implements FuncoesProduto {
 	private String nome, empresa;
 	private int id;
 	private double preco;
-	
-	Produto(String nome, String empresa, int id, double preco){
-		this.nome = nome;
-		this.empresa = empresa;
-		this.id = id;
-		this.preco = preco;
+	private String dataFabricacao;
+	private String dataValidade;
+
+	Produto(String nome, String empresa, int id, double preco, String dataFabricacao, String dataValidade) {
+	    this.nome = nome;
+	    this.empresa = empresa;
+	    this.id = id;
+	    this.preco = preco;
+	    this.dataFabricacao = dataFabricacao;
+	    this.dataValidade = dataValidade;
 	}
-	
+
+
 	public String getNome() {
 		return nome;
 	}
@@ -37,8 +42,21 @@ public abstract class Produto implements FuncoesProduto {
 	public void setPreco(double preco) {
 		this.preco = preco;
 	}
-	
+	public String getDataFabricacao() {
+		return dataFabricacao;
+	}
+	public void setDataFabricacao(String dataFabricacao) {
+		this.dataFabricacao = dataFabricacao;
+	}
+	public String getDataValidade() {
+		return dataValidade;
+	}
+	public void setDataValidade(String dataValidade) {
+		this.dataValidade = dataValidade;
+	}
+
 	public abstract void MostrarDados(Estoque estoque);
-	//Metodo para mostrar quando o produto vencer
+	
+	public abstract boolean estaVencido();
 	
 }

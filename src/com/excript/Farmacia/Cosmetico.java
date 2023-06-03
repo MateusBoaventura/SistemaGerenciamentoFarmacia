@@ -1,14 +1,16 @@
 package com.excript.Farmacia;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Cosmetico extends Produto {
 	
 	private categoria categoria;
 	private String descricao;
 	private Estoque estoque;
-	//Data de validade
 	
-	public Cosmetico(String nome, String empresa, int id, double preco, categoria categoria, String descricao) {
-		super(nome, empresa, id, preco);
+	public Cosmetico(String nome, String empresa, int id, double preco, categoria categoria, String descricao, String dataFabricacao, String dataValidade) {
+		super(nome, empresa, id, preco, dataFabricacao, dataValidade);
 		this.categoria = categoria;
 		this.descricao = descricao;
 	}
@@ -37,6 +39,12 @@ public class Cosmetico extends Produto {
 		MAQUIAGEM, CUIDADOS_PELE, CUIDADOS_CABELO, FRAGRANCIAS, OUTROS;
 	}
 	
+	public boolean estaVencido() {
+	    LocalDate dataAtual = LocalDate.now();
+	    LocalDate dataValidadeFormatada = LocalDate.parse(getDataValidade(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+	    return dataValidadeFormatada.isBefore(dataAtual);
+	}
+	
 	@Override
     public void MostrarDados(Estoque estoque) {
         if (estoque.verificarCosmetico(this)) {
@@ -44,11 +52,19 @@ public class Cosmetico extends Produto {
             System.out.println("Empresa: " + getEmpresa());
             System.out.println("Categoria: " + getCategoria());
             System.out.println("Id: " + getId());
-            System.out.println("Preco: R$" + getPreco());
-            System.out.println("Descricao: "+ getDescricao());
-        } else {
-            System.out.println("O cosmetico nao esta no estoque.");
-        }
+            System.out.println("Preço: R$" + getPreco());
+            System.out.println("Descrição: "+ getDescricao());
+	        System.out.println("Data de Fabricação: " + getDataFabricacao());
+	        System.out.println("Data de Validade: " + getDataValidade());
+
+	        if (estaVencido()) {
+	            System.out.println("Status: Vencido!");
+	        } else {
+	            System.out.println("Status: Não vencido.");
+	        }
+	    } else {
+	        System.out.println("O Cosmético não está no estoque.");
+	    }
     }
 	
 }

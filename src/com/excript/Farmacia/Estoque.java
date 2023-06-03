@@ -1,5 +1,7 @@
 package com.excript.Farmacia;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
 
 public class Estoque implements GestorEstoque {
 	
@@ -127,41 +129,114 @@ public class Estoque implements GestorEstoque {
 	    }
 	}
 	
-	public boolean removerProduto(Produto produto) {
+	public boolean adicionarCarrinho(Produto produto) {
 	    if (produto instanceof Medicamento) {
 	        if (Medicamentos.remove(produto)) {
-	            System.out.println("O Medicamento " + produto.getNome() + " foi removido com sucesso!");
+	            System.out.println(produto.getNome() + " foi adicionado no carrinho.");
 	            atualizarQtd();
 	            return true;
 	        }
 	    } else if (produto instanceof Cosmetico) {
 	        if (Cosmeticos.remove(produto)) {
-	            System.out.println("O Cosmetico " + produto.getNome() + " foi removido com sucesso!");
+	            System.out.println(produto.getNome() + " foi adicionado no carrinho.");
 	            atualizarQtd();
 	            return true;
 	        }
 	    } else if (produto instanceof GiftCard) {
 	        if (GiftCards.remove(produto)) {
-	            System.out.println("O GiftCard " + produto.getNome() + " foi removido com sucesso!");
+	            System.out.println(produto.getNome() + " foi adicionado no carrinho.");
 	            atualizarQtd();
 	            return true;
 	        }
 	    } else if (produto instanceof Snack) {
 	        if (Snacks.remove(produto)) {
-	            System.out.println("O Snack " + produto.getNome() + " foi removido com sucesso!");
+	            System.out.println(produto.getNome() + " foi adicionado no carrinho.");
 	            atualizarQtd();
 	            return true;
 	        }
 	    } else if (produto instanceof Acessorio) {
 	        if (Acessorios.remove(produto)) {
-	            System.out.println("O Acessorio " + produto.getNome() + " foi removido com sucesso!");
+	            System.out.println(produto.getNome() + " foi adicionado no carrinho.");
 	            atualizarQtd();
 	            return true;
 	        }
 	    }
 	    
-	    System.out.println("O produto " + produto.getNome() + " nao foi encontrado.");
+	    System.out.println("O produto " + produto.getNome() + " não foi encontrado.");
 	    return false;
+	}
+	
+	public void exibirListaProdutos() {
+	    Map<String, Integer> nomeQuantidadeMap = new HashMap<>(); // Cria um mapa para armazenar os nomes dos produtos e suas quantidades
+	    
+	    // Percorre a lista dos produtos e atualiza o mapa com os nomes e quantidades correspondentes
+	    for (Produto medicamento : Medicamentos) {
+	        String nome = medicamento.getNome();
+	        int quantidade = nomeQuantidadeMap.getOrDefault(nome, 0);
+	        nomeQuantidadeMap.put(nome, quantidade + 1);
+	    }
+	    
+	    for (Produto acessorio : Acessorios) {
+	        String nome = acessorio.getNome();
+	        int quantidade = nomeQuantidadeMap.getOrDefault(nome, 0);
+	        nomeQuantidadeMap.put(nome, quantidade + 1);
+	    }
+	    
+	    for (Produto giftCard : GiftCards) {
+	        String nome = giftCard.getNome();
+	        int quantidade = nomeQuantidadeMap.getOrDefault(nome, 0);
+	        nomeQuantidadeMap.put(nome, quantidade + 1);
+	    }
+	    
+	    for (Produto snack : Snacks) {
+	        String nome = snack.getNome();
+	        int quantidade = nomeQuantidadeMap.getOrDefault(nome, 0);
+	        nomeQuantidadeMap.put(nome, quantidade + 1);
+	    }
+	    
+	    for (Produto cosmetico : Cosmeticos) {
+	        String nome = cosmetico.getNome();
+	        int quantidade = nomeQuantidadeMap.getOrDefault(nome, 0);
+	        nomeQuantidadeMap.put(nome, quantidade + 1);
+	    }
+	    
+	    // Exibe os nomes e preços dos produtos com suas quantidades
+	    for (Map.Entry<String, Integer> entry : nomeQuantidadeMap.entrySet()) {
+	        String nome = entry.getKey(); // Obtém a chave (nome do produto) do mapa
+	        int quantidade = entry.getValue(); // Obtém o valor (quantidade do produto) do mapa
+	        
+	        // Percorre cada lista de produtos para encontrar o produto com o nome correspondente e exibir seu preço
+	        for (Produto produto : Medicamentos) {
+	            if (produto.getNome().equals(nome)) {
+	                System.out.println(nome + " (" + quantidade + "): R$" + produto.getPreco());
+	                break;
+	            }
+	        }
+	        for (Produto produto : Acessorios) {
+	            if (produto.getNome().equals(nome)) {
+	                System.out.println(nome + " (" + quantidade + "): R$" + produto.getPreco());
+	                break;
+	            }
+	        }
+	        for (Produto produto : GiftCards) {
+	            if (produto.getNome().equals(nome)) {
+	                System.out.println(nome + " (" + quantidade + "): R$" + produto.getPreco());
+	                break;
+	            }
+	        }
+	        for (Produto produto : Snacks) {
+	            if (produto.getNome().equals(nome)) {
+	                System.out.println(nome + " (" + quantidade + "): R$" + produto.getPreco());
+	                break;
+	            }
+	        }
+	        for (Produto produto : Cosmeticos) {
+	            if (produto.getNome().equals(nome)) {
+	                System.out.println(nome + " (" + quantidade + "): R$" + produto.getPreco());
+	                break;
+	            }
+	        }
+	    }
 	}
 
 	
@@ -175,7 +250,7 @@ public class Estoque implements GestorEstoque {
 	
 	public boolean adicionarMedicamento(Produto medicamento) {
 	    if (verificarCodigo(medicamento.getId())) {
-	        System.out.println("Codigo ja existe. Adicao nao e possivel.");
+	        System.out.println("Código já existe. Adição não é possível.");
 	        return false;
 	    }
 
@@ -200,20 +275,20 @@ public class Estoque implements GestorEstoque {
 				return true;
 			}
 		}
-		System.out.println("O codigo " + codigoMedicamento + " nao foi encontrado.");
+		System.out.println("O código " + codigoMedicamento + " não foi encontrado.");
 		return false;
 	};
 	
 	public boolean adicionarAcessorio(Produto acessorio) {
 		if (verificarCodigo(acessorio.getId())) {
-			System.out.println("Codigo ja existe. Adicao nao e possivel.");
+			System.out.println("Código já existe. Adição não é possível.");
 			acessorio = null;
 			return false;
 		}
 		Acessorios.add(acessorio);
 		((Acessorio) acessorio).setEstoque(this); // Configurando o estoque no acessorio adicionado
 		
-		System.out.println("Acessorio adicionado com sucesso!");
+		System.out.println("Acessório adicionado com sucesso!");
 		qtdAcessorio++;
 		return true;
 	}
@@ -226,24 +301,24 @@ public class Estoque implements GestorEstoque {
 		for(Produto acessorio : Acessorios) {
 			if(acessorio.getId() == codigoAcessorio) {
 				Acessorios.remove(acessorio);
-				System.out.println("O acessorio "+ acessorio.getNome() + " foi removido com sucesso!");
+				System.out.println("O acessório "+ acessorio.getNome() + " foi removido com sucesso!");
 				atualizarQtd();
 				return true;
 			}
 		}
-		System.out.println("O codigo "+ codigoAcessorio +" nao foi encontrado.");
+		System.out.println("O código "+ codigoAcessorio +" não foi encontrado.");
 		return false;
 	}
 	
 	public boolean adicionarCosmetico(Produto cosmetico) {
 		if (verificarCodigo(cosmetico.getId())) {
-			System.out.println("Codigo ja existe. Adicao nao e possivel.");
+			System.out.println("Código já existe. Adição não é possível.");
 			return false;
 		}
 		Cosmeticos.add(cosmetico);
 		((Cosmetico) cosmetico).setEstoque(this); // Configurando o estoque no cosmetico adicionado
 		
-		System.out.println("Cosmetico adicionado com sucesso!");
+		System.out.println("Cosmético adicionado com sucesso!");
 		qtdCosmetico++;
 		return true;
 	}
@@ -256,18 +331,18 @@ public class Estoque implements GestorEstoque {
 		for(Produto cosmetico : Cosmeticos) {
 			if(cosmetico.getId() == codigoCosmetico) {
 				Cosmeticos.remove(cosmetico);
-				System.out.println("O cosmetico "+ cosmetico.getNome() +" foi removido com sucesso!");
+				System.out.println("O cosmético "+ cosmetico.getNome() +" foi removido com sucesso!");
 				atualizarQtd();
 				return true;
 			}
 		}
-		System.out.println("O codigo "+ codigoCosmetico +" nao foi encontrado.");
+		System.out.println("O código "+ codigoCosmetico +" não foi encontrado.");
 		return false;
 	}
 	
 	public boolean adicionarGiftCard(Produto giftCard) {
 		if (verificarCodigo(giftCard.getId())) {
-			System.out.println("Codigo ja existe. Adicao nao e possivel.");
+			System.out.println("Código já existe. Adição não é possível.");
 			return false;
 		}
 		GiftCards.add(giftCard);
@@ -291,13 +366,13 @@ public class Estoque implements GestorEstoque {
 				return true;
 			}
 		}
-		System.out.println("O codigo "+ codigoGiftCard +" nao foi encontrado.");
+		System.out.println("O código "+ codigoGiftCard +" não foi encontrado.");
 		return false;
 	}
 	
 	public boolean adicionarSnack(Produto snack) {
 		if (verificarCodigo(snack.getId())) {
-			System.out.println("Codigo ja existe. Adicao nao e possivel.");
+			System.out.println("Código já existe. Adição não é possível.");
 			return false;
 		}
 		Snacks.add(snack);
@@ -321,15 +396,15 @@ public class Estoque implements GestorEstoque {
 				return true;
 			}
 		}
-		System.out.println("O codigo "+ codigoSnack +" nao foi encontrado.");
+		System.out.println("O código "+ codigoSnack +" não foi encontrado.");
 		return false;
 	}
 	
 	public void exibirQtd() {
 		System.out.println("Quantidade de Medicamentos: " + getQtdMedicamento());
-		System.out.println("Quantidade de Cosmeticos: " + getQtdCosmetico());
+		System.out.println("Quantidade de Cosméticos: " + getQtdCosmetico());
 		System.out.println("Quantidade de GiftCards: " + getQtdGiftCard());
 		System.out.println("Quantidade de Snacks: " + getQtdSnack());
-		System.out.println("Quantidade de Acessorios: " + getQtdAcessorio());
+		System.out.println("Quantidade de Acessórios: " + getQtdAcessorio());
 	}
 }

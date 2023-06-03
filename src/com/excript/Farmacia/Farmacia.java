@@ -5,38 +5,107 @@ public class Farmacia {
 		
 		/*	Para instanciar cada uma das classes:
 		 * 	Cliente(nome, telefone, email, pontos)
-		 * 	Medicamento(nome, empresa, peso, id, preço, eReceita?, eGenerico?)
-		 * 	Cosmetico(nome, empresa, id, preço, categoria, descrição)
-		 * 	Snack(nome, empresa, id, preço, categoria, descrição, quantidade)
-		 * 	Acessorio(nome, empresa, id, preço)
-		 * 	GiftCard(nome, empresa, id, preço, codigo, ativo?)
+		 * 	Medicamento(nome, empresa, peso, id, preço, eReceita?, eGenerico, DataFabricacao, dataValidade)
+		 * 	Cosmetico(nome, empresa, id, preço, categoria, descrição, DataFabricacao, dataValidade)
+		 * 	Categorias cosmetico: MAQUIAGEM, CUIDADOS_PELE, CUIDADOS_CABELO, FRAGRANCIAS, OUTROS;
+		 * 	Snack(nome, empresa, id, preço, categoria, descrição, quantidade, DataFabricacao, dataValidade)
+		 * 	Categorias Snacks: SALGADINHO, BISCOITO, BARRA_DE_CEREAL, CHOCOLATE;
+		 * 	Acessorio(nome, empresa, id, preço, DataFabricacao, dataValidade)
+		 * 	GiftCard(nome, empresa, id, preço, codigo, ativo?, DataFabricacao, dataValidade)
 		 * 
 		 * 	Sempre inicie um estoque criando Estoque estoque = new Estoque();
+		 * 	Sempre inicie Pontos com 0 (é o padrão);
+		 * 	Inicie um CadastroDeClientes;
+		 * 	
+		 * 	Para cadastrar um novo cliente: (nome, telefone, email, pontosCliente);
+		 * 	Para realizar uma venda: instancie uma venda:
+		 * 	Venda venda1 = new Venda(idVenda, cliente);
 		 * 	No momento, para atribuir pontos à um cliente, é necessário instanciar os pontos e a quantidade.
 		 * 	 
-		 * 	Obs.: sobre o giftCard, ainda há implementações para fazer.
-		 * 	Obs.2: ainda vou adicionar as implementações em relação à datas.
+		 * 	
+		 * 	
 		 */
 		
 		Estoque estoque = new Estoque();
-		Pontos pontosCliente = new Pontos(99);
-		Cliente cliente = new Cliente("Mateus", "988449775", "mateus_boaventura@hotmail.com", pontosCliente);
-		Venda venda = new Venda(1, cliente);
-		venda.setEstoque(estoque);
-		Medicamento MED1 = new Medicamento("MED1", "EMPRESA1", 200, 123, 30, false, true);
+		Pontos pontosCliente = new Pontos(0);
+		CadastroDeClientes clientes = new CadastroDeClientes();
+		Cliente MariaLuiza = new Cliente("Maria Luiza", "0000000", "mariaLuiza@gmail.com", pontosCliente);
+		clientes.cadastrarCliente(MariaLuiza);
+		Medicamento alivium = new Medicamento("Alivium", "EmpresaDeMed", 180, 32873, 39.9, false, false, "10/03/2020", "11/04/2025");
+		estoque.adicionarMedicamento(alivium);
+		Medicamento alivium2 = new Medicamento("Alivium", "EmpresaDeMed", 180, 12442, 39.9, true, false, "10/03/2020", "11/04/2024");
+		estoque.adicionarMedicamento(alivium2);
+		Medicamento dipirona = new Medicamento("Dipirona", "EmpresaDeMed", 180, 11111, 20, false, false, "10/03/2022", "11/04/2023");
+		estoque.adicionarMedicamento(dipirona);
+		Medicamento dipirona2 = new Medicamento("Dipirona", "EmpresaDeMed", 180, 11112, 20, false, false, "10/03/2022", "11/07/2023");
+		estoque.adicionarMedicamento(dipirona2);
+		Medicamento dipirona3 = new Medicamento("Dipirona", "EmpresaDeMed", 180, 11113, 20, false, false, "10/03/2022", "11/09/2023");
+		estoque.adicionarMedicamento(dipirona3);
+		Medicamento dipirona4 = new Medicamento("Dipirona", "EmpresaDeMed", 180, 11113, 20, false, false, "10/03/2022", "11/07/2023");
+		estoque.adicionarMedicamento(dipirona4);
+		Medicamento paracetamol = new Medicamento("Paracetamol", "EmpresaDeMed", 180, 14321, 39.9, false, false, "10/03/2022", "11/07/2023");
+		estoque.adicionarMedicamento(paracetamol);
+		Medicamento pondera = new Medicamento("Paracetamol", "EmpresaDeMed", 180, 14321, 39.9, false, true, "10/03/2022", "11/07/2023");
+		estoque.adicionarMedicamento(pondera);
+		Cosmetico Dove = new Cosmetico("Dove", "EmpresaDeCosmetico", 43532, 19.9, Cosmetico.categoria.CUIDADOS_PELE, "Um desodorante para a pele", "01/02/2023", "08/04/2024");
+		estoque.adicionarCosmetico(Dove);
+		Cosmetico BatomVinho = new Cosmetico("Batom Vinho", "EmpresaDeCosmetico", 54321, 4.9, Cosmetico.categoria.MAQUIAGEM, "Batom de cor vinho escuro", "02/03/2023", "04/01/2024");
+		estoque.adicionarCosmetico(BatomVinho);
+		Cosmetico Esmalte = new Cosmetico("Esmalte rosa", "EmpresaDeCosmetico", 66676, 3, Cosmetico.categoria.MAQUIAGEM, "Um esmalte rosa", "22/03/2023", "10/05/2025");
+		estoque.adicionarCosmetico(Esmalte);
+		Snack batom = new Snack("Batom Garoto", "EmpresaSnack", 99876, 2.9, Snack.categoria.CHOCOLATE, "Chocolate ao leite", 1, "24/02/2023", "23/06/2023");
+		estoque.adicionarSnack(batom);
+		Snack Pacotebatom = new Snack("Pacote Batom Garoto", "EmpresaSnack", 24231, 29.9, Snack.categoria.CHOCOLATE, "Pacote com 11 batons, chocolate ao leite", 11, "24/03/2023", "23/09/2023");
+		estoque.adicionarSnack(Pacotebatom);
+		Snack DiamanteNegro = new Snack("Diamante Negro", "EmpresaSnack", 75643, 18.9, Snack.categoria.CHOCOLATE, "Chocolate ao leite com amendoim", 1, "24/02/2023", "23/05/2023");
+		estoque.adicionarSnack(DiamanteNegro);
+		Acessorio luva = new Acessorio("Luva", "EmpresaAcessorio", 23232, 4.9, "01/06/2023", "14/10/2026");
+		estoque.adicionarAcessorio(luva);
+		Acessorio AcessorioCaro = new Acessorio("AcessorioCaro", "EmpresaAcessorio", 23233, 400, "01/06/2023", "16/11/2025");
+		estoque.adicionarAcessorio(AcessorioCaro);
+		GiftCard LoL = new GiftCard("LOL RIOT POINTS", "Riot Games", 321, 100, 420347138, false, "01/01/2023", "23/10/2023");
+		estoque.adicionarGiftCard(LoL);
 		System.out.println("");
-		estoque.adicionarMedicamento(MED1);
 		System.out.println("");
-		Snack choco = new Snack("Batom", "Garoto", 784, 2.9, Snack.categoria.CHOCOLATE, "Chocolate ao leite", 1);
-		estoque.adicionarSnack(choco);
+		System.out.println("");
+		MariaLuiza.mostrarDados();
+		Cliente LailaDoida = new Cliente("Laila Doida", "3243230", "lailadoida@gmail.com", pontosCliente);
+		System.out.println("");
+		clientes.atualizarTelefone(LailaDoida, "99532761");
+		System.out.println("");
+		clientes.atualizarTelefone(MariaLuiza, "99532761");
+		System.out.println("");
+		System.out.println("");
+		MariaLuiza.mostrarDados();
 		System.out.println("");
 		estoque.exibirQtd();
 		System.out.println("");
-		venda.adicionarProduto(MED1);
-		venda.adicionarProduto(choco);
+		estoque.exibirListaProdutos();
 		System.out.println("");
-		venda.finalizarVenda(cliente);
+		Venda venda = new Venda(95483, MariaLuiza, estoque);
 		System.out.println("");
-		venda.exibirTotalVendas();
+		Pacotebatom.MostrarDados(estoque);
+		venda.adicionarProduto(Pacotebatom);
+		System.out.println("");
+		venda.adicionarProduto(paracetamol);
+		System.out.println("");
+		venda.adicionarProduto(LoL);
+		System.out.println("");
+		venda.exibirCarrinho(MariaLuiza);
+		System.out.println("");
+		venda.adicionarProduto(luva);
+		venda.adicionarProduto(luva);
+		venda.adicionarProduto(alivium2);
+		System.out.println("");
+		venda.exibirCarrinho(MariaLuiza);
+		venda.adicionarProduto(dipirona);
+		venda.adicionarProduto(dipirona);
+		venda.adicionarProduto(dipirona);
+		System.out.println("");
+		venda.exibirCarrinho(MariaLuiza);
+		System.out.println("");
+		venda.finalizarVenda(MariaLuiza);
+		System.out.println("");
+		MariaLuiza.mostrarDados();
 	}
 }

@@ -1,14 +1,16 @@
 package com.excript.Farmacia;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Medicamento extends Produto implements FuncoesMedicamento{
 	
 	private int peso;
 	private boolean eReceita, eGenerico;
 	private Estoque estoque;
-	//Data de validade
-	
-	public Medicamento(String nome, String empresa, int peso, int id, double preco, boolean eReceita, boolean eGenerico) {
-		super(nome, empresa, id, preco);
+		
+	public Medicamento(String nome, String empresa, int peso, int id, double preco, boolean eReceita, boolean eGenerico, String dataFabricacao, String dataValidade) {
+		super(nome, empresa, id, preco, dataFabricacao, dataValidade);
 		this.peso = peso;
 		this.eReceita = eReceita;
 		this.eGenerico = eGenerico;
@@ -47,18 +49,32 @@ public class Medicamento extends Produto implements FuncoesMedicamento{
 		}
 	}
 	
+	public boolean estaVencido() {
+	    LocalDate dataAtual = LocalDate.now();
+	    LocalDate dataValidadeFormatada = LocalDate.parse(getDataValidade(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+	    return dataValidadeFormatada.isBefore(dataAtual);
+	}
+	
 	 @Override
 	    public void MostrarDados(Estoque estoque) {
 	        if (estoque.verificarMedicamento(this)) {
 	            System.out.println("Nome: " + getNome());
 	            System.out.println("Empresa: " + getEmpresa());
-	            System.out.println("Receita: " + (iseReceita() ? "Sim" : "Nao"));
-	            System.out.println("Generico: " + (iseGenerico() ? "Sim" : "Nao"));
+	            System.out.println("Receita: " + (iseReceita() ? "Sim" : "Não"));
+	            System.out.println("Genérico: " + (iseGenerico() ? "Sim" : "Não"));
 	            System.out.println("Peso: " + getPeso());
 	            System.out.println("Id: " + getId());
-	            System.out.println("Preco: R$" + getPreco());
-	        } else {
-	            System.out.println("O medicamento nao esta no estoque.");
-	        }
+	            System.out.println("Preço: R$" + getPreco());
+		        System.out.println("Data de Fabricação: " + getDataFabricacao());
+		        System.out.println("Data de Validade: " + getDataValidade());
+
+		        if (estaVencido()) {
+		            System.out.println("Status: Vencido!");
+		        } else {
+		            System.out.println("Status: Não vencido.");
+		        }
+		    } else {
+		        System.out.println("O Medicamento não está no estoque.");
+		    }
 	    }
 }

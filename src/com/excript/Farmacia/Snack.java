@@ -1,5 +1,8 @@
 package com.excript.Farmacia;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Snack extends Produto{
 	
 	//Data de validade
@@ -8,8 +11,8 @@ public class Snack extends Produto{
 	private String descricao;
 	int quantidade; //Quantidade em uma embalagem
 	
-	public Snack(String nome, String empresa, int id, double preco, categoria categoria, String descricao, int quantidade) {
-		super(nome, empresa, id, preco);
+	public Snack(String nome, String empresa, int id, double preco, categoria categoria, String descricao, int quantidade, String dataFabricacao, String dataValidade) {
+		super(nome, empresa, id, preco, dataFabricacao, dataValidade);
 		this.categoria = categoria;
 		this.descricao = descricao;
 		this.quantidade = quantidade;
@@ -45,6 +48,11 @@ public class Snack extends Produto{
 		SALGADINHO, BISCOITO, BARRA_DE_CEREAL, CHOCOLATE;
 	}
 	
+	public boolean estaVencido() {
+	    LocalDate dataAtual = LocalDate.now();
+	    LocalDate dataValidadeFormatada = LocalDate.parse(getDataValidade(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+	    return dataValidadeFormatada.isBefore(dataAtual);
+	}
 	
 	 @Override
 	    public void MostrarDados(Estoque estoque) {
@@ -54,11 +62,19 @@ public class Snack extends Produto{
 	            System.out.println("Empresa: " + getEmpresa());
 	            System.out.println("Categoria: " + getCategoria());
 	            System.out.println("Id: " + getId());
-	            System.out.println("Preco: R$" + getPreco());
-	            System.out.println("Descricao: "+ getDescricao());
-	        } else {
-	            System.out.println("O Snack nao esta no estoque.");
-	        }
+	            System.out.println("Preço: R$" + getPreco());
+	            System.out.println("Descrição: "+ getDescricao());
+	            System.out.println("Data de Fabricação: " + getDataFabricacao());
+		        System.out.println("Data de Validade: " + getDataValidade());
+
+		        if (estaVencido()) {
+		            System.out.println("Status: Vencido!");
+		        } else {
+		            System.out.println("Status: Não vencido.");
+		        }
+		    } else {
+		        System.out.println("O Snack não está no estoque.");
+		    }
 	    }
 	
 }

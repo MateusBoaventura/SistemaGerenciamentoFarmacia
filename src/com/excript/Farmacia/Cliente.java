@@ -44,4 +44,15 @@ public class Cliente {
     public void setPontos(Pontos pontos) {
         this.pontos = pontos;
     }
+    
+    public void mostrarPontos() {
+        System.out.println("Pontos acumulados: " + pontos.getPontos());
+    }
+    
+    public void mostrarDados() {
+        System.out.println("Nome: " + nome);
+        System.out.println("Telefone: " + telefone);
+        System.out.println("Email: " + email);
+        System.out.println("Pontos acumulados: " + pontos.getPontos());
+    }
 }

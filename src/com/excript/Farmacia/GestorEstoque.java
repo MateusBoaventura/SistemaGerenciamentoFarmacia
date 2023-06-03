@@ -3,7 +3,7 @@ package com.excript.Farmacia;
 public interface GestorEstoque {
 	public boolean verificarCodigo(int codigo);
 	public boolean verificarDisponibilidade(Produto produto);
-	public boolean removerProduto(Produto produto);
+	public boolean adicionarCarrinho(Produto produto);
 	public void atualizarQtd();
 	public boolean adicionarMedicamento(Produto Medicamento);
 	public boolean removerMedicamento(int codigoMedicamento);

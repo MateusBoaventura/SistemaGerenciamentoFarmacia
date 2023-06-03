@@ -1,20 +1,13 @@
 package com.excript.Farmacia;
 
 public @interface ConsertarDepois {
-	/*	- Sistema de Pontos: exibir quantos pontos tem um cliente. Descontar os pontos do cliente depois de pegar
-	 * um desconto;
-	 * 
-	 * 	- CONSERTAR mensagens com pontuação e ç, colocar pontuação e ç nas palavras e letras (TODAS);
-	 * 
-	 * 	- Criar um método em que eu exibo todos os NOMES(Apenas) dos produtos;
-	 * 
-	 * 	- Colocar o sistema de datas para validade dos produtos, fazer método em que se a data passou, crie um aviso dizendo
-	 * que o produto está vencido;
-	 * 
-	 * - Consertar as datas no geral;
-	 * 
-	 * 	- Consertar a classe GiftCard, vincular ela com o Cliente;
+	/*	- Faltando: quando chamar a função exibirEstoque para exibir todos os produtos do estoque, caso o produto esteja vencido, ele colocar um alerta ao lado dizendo PRODUTO VENCIDO!
+	 * 	- Implementar um sistema de quantidade de item. Digamos que eu queira adicionar 4 dipironas iguais, como eu faço?
+	 * 	- Implementar encadeamento, filtro de repetição e deixar o código mais limpo e organizado;
+	 * 	- Implementar os códigos de exceções;
+	 * 	- Colocar comentários em todo o código; 
 	 * 
 	 * 	- Colocar interface gráfica;
+	 * 	- Se não der certo, fazer um loop com while switch/case no Main;
 	 */
 }
