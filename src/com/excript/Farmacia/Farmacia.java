@@ -5,13 +5,13 @@ public class Farmacia {
 		
 		/*	Para instanciar cada uma das classes:
 		 * 	Cliente(nome, telefone, email, pontos)
-		 * 	Medicamento(nome, empresa, peso, id, preço, eReceita?, eGenerico, DataFabricacao, dataValidade)
-		 * 	Cosmetico(nome, empresa, id, preço, categoria, descrição, DataFabricacao, dataValidade)
+		 * 	Medicamento(nome, empresa, peso, id, preço, eReceita?, eGenerico, DataFabricacao, dataValidade, quantida)
+		 * 	Cosmetico(nome, empresa, id, preço, categoria, descrição, DataFabricacao, dataValidade, quantida)
 		 * 	Categorias cosmetico: MAQUIAGEM, CUIDADOS_PELE, CUIDADOS_CABELO, FRAGRANCIAS, OUTROS;
-		 * 	Snack(nome, empresa, id, preço, categoria, descrição, quantidade, DataFabricacao, dataValidade)
+		 * 	Snack(nome, empresa, id, preço, categoria, descrição, quantidade, DataFabricacao, dataValidade, quantida)
 		 * 	Categorias Snacks: SALGADINHO, BISCOITO, BARRA_DE_CEREAL, CHOCOLATE;
-		 * 	Acessorio(nome, empresa, id, preço, DataFabricacao, dataValidade)
-		 * 	GiftCard(nome, empresa, id, preço, codigo, ativo?, DataFabricacao, dataValidade)
+		 * 	Acessorio(nome, empresa, id, preço, DataFabricacao, dataValidade, quantida)
+		 * 	GiftCard(nome, empresa, id, preço, codigo, ativo?, DataFabricacao, dataValidade, quantida)
 		 * 
 		 * 	Sempre inicie um estoque criando Estoque estoque = new Estoque();
 		 * 	Sempre inicie Pontos com 0 (é o padrão);
@@ -20,9 +20,7 @@ public class Farmacia {
 		 * 	Para cadastrar um novo cliente: (nome, telefone, email, pontosCliente);
 		 * 	Para realizar uma venda: instancie uma venda:
 		 * 	Venda venda1 = new Venda(idVenda, cliente);
-		 * 	No momento, para atribuir pontos à um cliente, é necessário instanciar os pontos e a quantidade.
-		 * 	 
-		 * 	
+		 * 	Para iniciar os pontos, instancie Pontos pontosCliente = new Pontos(0); 	
 		 * 	
 		 */
 		
