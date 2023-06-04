@@ -5,13 +5,13 @@ public class Farmacia {
 		
 		/*	Para instanciar cada uma das classes:
 		 * 	Cliente(nome, telefone, email, pontos)
-		 * 	Medicamento(nome, empresa, peso, id, preço, eReceita?, eGenerico, DataFabricacao, dataValidade, quantida)
-		 * 	Cosmetico(nome, empresa, id, preço, categoria, descrição, DataFabricacao, dataValidade, quantida)
+		 * 	Medicamento(nome, empresa, peso, id, preço, eReceita?, eGenerico, DataFabricacao, dataValidade, quantidade)
+		 * 	Cosmetico(nome, empresa, id, preço, categoria, descrição, DataFabricacao, dataValidade, quantidade)
 		 * 	Categorias cosmetico: MAQUIAGEM, CUIDADOS_PELE, CUIDADOS_CABELO, FRAGRANCIAS, OUTROS;
-		 * 	Snack(nome, empresa, id, preço, categoria, descrição, quantidade, DataFabricacao, dataValidade, quantida)
+		 * 	Snack(nome, empresa, id, preço, categoria, descrição, quantidade, DataFabricacao, dataValidade, quantidade)
 		 * 	Categorias Snacks: SALGADINHO, BISCOITO, BARRA_DE_CEREAL, CHOCOLATE;
-		 * 	Acessorio(nome, empresa, id, preço, DataFabricacao, dataValidade, quantida)
-		 * 	GiftCard(nome, empresa, id, preço, codigo, ativo?, DataFabricacao, dataValidade, quantida)
+		 * 	Acessorio(nome, empresa, id, preço, DataFabricacao, dataValidade, quantidade)
+		 * 	GiftCard(nome, empresa, id, preço, codigo, ativo?, DataFabricacao, dataValidade, quantidade)
 		 * 
 		 * 	Sempre inicie um estoque criando Estoque estoque = new Estoque();
 		 * 	Sempre inicie Pontos com 0 (é o padrão);
