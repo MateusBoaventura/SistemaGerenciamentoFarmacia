@@ -1,7 +1,10 @@
 package com.excript.Farmacia;
+
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.List;
 
 public class Estoque implements GestorEstoque {
 	
@@ -84,161 +87,273 @@ public class Estoque implements GestorEstoque {
 
 	
 	public boolean verificarCodigo(int codigo) {
-		for(Produto medicamento : Medicamentos) {
-			if (medicamento.getId() == codigo) {
-				return true;
-			}
-		}
-		for (Produto acessorio : Acessorios) {
-			if(acessorio.getId() == codigo) {
-				return true;
-			}
-		}
-		for (Produto cosmetico : Cosmeticos) {
-			if(cosmetico.getId() == codigo) {
-				return true;
-			}
-		}
-		for (Produto giftCard : GiftCards) {
-			if(giftCard.getId() == codigo) {
-				return true;
-			}
-		}
-		for (Produto snack : Snacks) {
-			if(snack.getId() == codigo) {
-				return true;
-			}
-		}
-		
-		return false;
+	    for (Produto medicamento : Medicamentos) {
+	        if (medicamento.getId() == codigo && medicamento.getQuantidade() > 0) {
+	            return true;
+	        }
+	    }
+
+	    for (Produto acessorio : Acessorios) {
+	        if (acessorio.getId() == codigo && acessorio.getQuantidade() > 0) {
+	            return true;
+	        }
+	    }
+
+	    for (Produto cosmetico : Cosmeticos) {
+	        if (cosmetico.getId() == codigo && cosmetico.getQuantidade() > 0) {
+	            return true;
+	        }
+	    }
+
+	    for (Produto giftCard : GiftCards) {
+	        if (giftCard.getId() == codigo && giftCard.getQuantidade() > 0) {
+	            return true;
+	        }
+	    }
+
+	    for (Produto snack : Snacks) {
+	        if (snack.getId() == codigo && snack.getQuantidade() > 0) {
+	            return true;
+	        }
+	    }
+
+	    return false;
 	}
+
 	
-	public boolean verificarDisponibilidade(Produto produto) {
+	public boolean verificarDisponibilidade(Produto produto, int quantidade) {
 	    if (produto instanceof Medicamento) {
-	        return Medicamentos.contains(produto);
+	        Medicamento medicamento = (Medicamento) produto;
+	        return Medicamentos.contains(medicamento) && medicamento.getQuantidade() >= quantidade;
 	    } else if (produto instanceof Cosmetico) {
-	        return Cosmeticos.contains(produto);
+	        Cosmetico cosmetico = (Cosmetico) produto;
+	        return Cosmeticos.contains(cosmetico) && cosmetico.getQuantidade() >= quantidade;
 	    } else if (produto instanceof GiftCard) {
-	        return GiftCards.contains(produto);
+	        GiftCard giftCard = (GiftCard) produto;
+	        return GiftCards.contains(giftCard) && giftCard.getQuantidade() >= quantidade;
 	    } else if (produto instanceof Snack) {
-	        return Snacks.contains(produto);
+	        Snack snack = (Snack) produto;
+	        return Snacks.contains(snack) && snack.getQuantidade() >= quantidade;
 	    } else if (produto instanceof Acessorio) {
-	        return Acessorios.contains(produto);
+	        Acessorio acessorio = (Acessorio) produto;
+	        return Acessorios.contains(acessorio) && acessorio.getQuantidade() >= quantidade;
 	    } else {
 	        return false;
 	    }
 	}
 	
-	public boolean adicionarCarrinho(Produto produto) {
+
+	public int quantidadeDisponivel(Produto produto) {
+	    int quantidadeDisponivel = 0;
+
 	    if (produto instanceof Medicamento) {
-	        if (Medicamentos.remove(produto)) {
-	            System.out.println(produto.getNome() + " foi adicionado no carrinho.");
-	            atualizarQtd();
-	            return true;
+	        for (Produto p : Medicamentos) {
+	            if (p.getNome().equalsIgnoreCase(produto.getNome())) {
+	                Medicamento medicamento = (Medicamento) p;
+	                quantidadeDisponivel = medicamento.getQuantidade();
+	                break; // interrompe o loop após encontrar a primeira ocorrência
+	            }
 	        }
 	    } else if (produto instanceof Cosmetico) {
-	        if (Cosmeticos.remove(produto)) {
-	            System.out.println(produto.getNome() + " foi adicionado no carrinho.");
-	            atualizarQtd();
-	            return true;
+	        for (Produto p : Cosmeticos) {
+	            if (p.getNome().equalsIgnoreCase(produto.getNome())) {
+	                Cosmetico cosmetico = (Cosmetico) p;
+	                quantidadeDisponivel = cosmetico.getQuantidade();
+	                break; 
+	            }
 	        }
 	    } else if (produto instanceof GiftCard) {
-	        if (GiftCards.remove(produto)) {
-	            System.out.println(produto.getNome() + " foi adicionado no carrinho.");
-	            atualizarQtd();
-	            return true;
+	        for (Produto p : GiftCards) {
+	            if (p.getNome().equalsIgnoreCase(produto.getNome())) {
+	                GiftCard giftCard = (GiftCard) p;
+	                quantidadeDisponivel = giftCard.getQuantidade();
+	                break; 
+	            }
 	        }
 	    } else if (produto instanceof Snack) {
-	        if (Snacks.remove(produto)) {
-	            System.out.println(produto.getNome() + " foi adicionado no carrinho.");
-	            atualizarQtd();
-	            return true;
+	        for (Produto p : Snacks) {
+	            if (p.getNome().equalsIgnoreCase(produto.getNome())) {
+	                Snack snack = (Snack) p;
+	                quantidadeDisponivel = snack.getQuantidade();
+	                break; 
+	            }
 	        }
 	    } else if (produto instanceof Acessorio) {
-	        if (Acessorios.remove(produto)) {
-	            System.out.println(produto.getNome() + " foi adicionado no carrinho.");
-	            atualizarQtd();
-	            return true;
+	        for (Produto p : Acessorios) {
+	            if (p.getNome().equalsIgnoreCase(produto.getNome())) {
+	                Acessorio acessorio = (Acessorio) p;
+	                quantidadeDisponivel = acessorio.getQuantidade();
+	                break;
+	            }
 	        }
 	    }
-	    
+
+	    return quantidadeDisponivel;
+	}
+
+
+	
+	public boolean adicionarCarrinho(Produto produto, int quantidade) {
+	    if (produto instanceof Medicamento && Medicamentos.contains(produto)) {
+	        int quantidadeDisponivel = quantidadeDisponivel(produto);
+	        if (quantidadeDisponivel >= quantidade) {
+	            int index = Medicamentos.indexOf(produto);
+	            Produto medicamento = Medicamentos.get(index);
+	            if (medicamento.getQuantidade() >= quantidade) {
+	                medicamento.setQuantidade(medicamento.getQuantidade() - quantidade);
+	                System.out.println(quantidade + " unidades de " + produto.getNome() + " foram adicionadas no carrinho.");
+	                atualizarQtd();
+	                return true;
+	            }
+	        } else {
+	            System.out.println("Quantidade indisponível. Apenas " + quantidadeDisponivel + " unidades de " + produto.getNome() + " estão disponíveis no estoque.");
+	            System.out.println("");
+	        }
+	    } else if (produto instanceof Cosmetico && Cosmeticos.contains(produto)) {
+	        int quantidadeDisponivel = quantidadeDisponivel(produto);
+	        if (quantidadeDisponivel >= quantidade) {
+	            int index = Cosmeticos.indexOf(produto);
+	            Produto cosmetico = Cosmeticos.get(index);
+	            if (cosmetico.getQuantidade() >= quantidade) {
+	                cosmetico.setQuantidade(cosmetico.getQuantidade() - quantidade);
+	                System.out.println(quantidade + " unidades de " + produto.getNome() + " foram adicionadas no carrinho.");
+	                atualizarQtd();
+	                return true;
+	            }
+	        } else {
+	            System.out.println("Quantidade indisponível. Apenas " + quantidadeDisponivel + " unidades de " + produto.getNome() + " estão disponíveis no estoque.");
+	            System.out.println("");
+	        }
+	    } else if (produto instanceof GiftCard && GiftCards.contains(produto)) {
+	        int quantidadeDisponivel = quantidadeDisponivel(produto);
+	        if (quantidadeDisponivel >= quantidade) {
+	            int index = GiftCards.indexOf(produto);
+	            Produto giftCard = GiftCards.get(index);
+	            if (giftCard.getQuantidade() >= quantidade) {
+	                giftCard.setQuantidade(giftCard.getQuantidade() - quantidade);
+	                System.out.println(quantidade + " unidades de " + produto.getNome() + " foram adicionadas no carrinho.");
+	                atualizarQtd();
+	                return true;
+	            }
+	        } else {
+	            System.out.println("Quantidade indisponível. Apenas " + quantidadeDisponivel + " unidades de " + produto.getNome() + " estão disponíveis no estoque.");
+	            System.out.println("");
+	        }
+	    } else if (produto instanceof Snack && Snacks.contains(produto)) {
+	        int quantidadeDisponivel = quantidadeDisponivel(produto);
+	        if (quantidadeDisponivel >= quantidade) {
+	            int index = Snacks.indexOf(produto);
+	            Produto snack = Snacks.get(index);
+	            if (snack.getQuantidade() >= quantidade) {
+	                snack.setQuantidade(snack.getQuantidade() - quantidade);
+	                System.out.println(quantidade + " unidades de " + produto.getNome() + " foram adicionadas no carrinho.");
+	                atualizarQtd();
+	                return true;
+	            }
+	        } else {
+	            System.out.println("Quantidade indisponível. Apenas " + quantidadeDisponivel + " unidades de " + produto.getNome() + " estão disponíveis no estoque.");
+	            System.out.println("");
+	        }
+	    } else if (produto instanceof Acessorio && Acessorios.contains(produto)) {
+	        int quantidadeDisponivel = quantidadeDisponivel(produto);
+	        if (quantidadeDisponivel >= quantidade) {
+	            int index = Acessorios.indexOf(produto);
+	            Produto acessorio = Acessorios.get(index);
+	            if (acessorio.getQuantidade() >= quantidade) {
+	                acessorio.setQuantidade(acessorio.getQuantidade() - quantidade);
+	                System.out.println(quantidade + " unidades de " + produto.getNome() + " foram adicionadas no carrinho.");
+	                atualizarQtd();
+	                return true;
+	            }
+	        } else {
+	            System.out.println("Quantidade indisponível. Apenas " + quantidadeDisponivel + " unidades de " + produto.getNome() + " estão disponíveis no estoque.");
+	            System.out.println("");
+	        }
+	    }
+
 	    System.out.println("O produto " + produto.getNome() + " não foi encontrado.");
 	    return false;
 	}
+
+
 	
 	public void exibirListaProdutos() {
-	    Map<String, Integer> nomeQuantidadeMap = new HashMap<>(); // Cria um mapa para armazenar os nomes dos produtos e suas quantidades
-	    
-	    // Percorre a lista dos produtos e atualiza o mapa com os nomes e quantidades correspondentes
-	    for (Produto medicamento : Medicamentos) {
-	        String nome = medicamento.getNome();
+        Map<String, Integer> nomeQuantidadeMap = new HashMap<>();
+
+        atualizarNomeQuantidadeMap(Medicamentos, nomeQuantidadeMap);
+        atualizarNomeQuantidadeMap(Acessorios, nomeQuantidadeMap);
+        atualizarNomeQuantidadeMap(GiftCards, nomeQuantidadeMap);
+        atualizarNomeQuantidadeMap(Snacks, nomeQuantidadeMap);
+        atualizarNomeQuantidadeMap(Cosmeticos, nomeQuantidadeMap);
+
+        for (Map.Entry<String, Integer> entry : nomeQuantidadeMap.entrySet()) {
+            String nome = entry.getKey();
+            int quantidade = entry.getValue();
+
+            Produto produtoEncontrado = encontrarProdutoPorNome(nome);
+            if (produtoEncontrado != null) {
+                String preco = formatarPreco(produtoEncontrado.getPreco());
+                String alerta = produtoEncontrado.estaVencido() ? " [PRODUTO VENCIDO!]" : "";
+                System.out.println(nome + " (" + quantidade + "): R$" + preco + alerta);
+            }
+        }
+    }
+	
+	private Produto encontrarProdutoPorNome(String nome) {
+        for (Produto produto : Medicamentos) {
+            if (produto.getNome().equals(nome)) {
+                return produto;
+            }
+        }
+
+        for (Produto produto : Acessorios) {
+            if (produto.getNome().equals(nome)) {
+                return produto;
+            }
+        }
+
+        for (Produto produto : GiftCards) {
+            if (produto.getNome().equals(nome)) {
+                return produto;
+            }
+        }
+
+        for (Produto produto : Snacks) {
+            if (produto.getNome().equals(nome)) {
+                return produto;
+            }
+        }
+
+        for (Produto produto : Cosmeticos) {
+            if (produto.getNome().equals(nome)) {
+                return produto;
+            }
+        }
+
+        return null;
+    }
+
+	private void atualizarNomeQuantidadeMap(List<Produto> produtos, Map<String, Integer> nomeQuantidadeMap) {
+	    for (Produto produto : produtos) {
+	        String nome = produto.getNome();
 	        int quantidade = nomeQuantidadeMap.getOrDefault(nome, 0);
 	        nomeQuantidadeMap.put(nome, quantidade + 1);
-	    }
-	    
-	    for (Produto acessorio : Acessorios) {
-	        String nome = acessorio.getNome();
-	        int quantidade = nomeQuantidadeMap.getOrDefault(nome, 0);
-	        nomeQuantidadeMap.put(nome, quantidade + 1);
-	    }
-	    
-	    for (Produto giftCard : GiftCards) {
-	        String nome = giftCard.getNome();
-	        int quantidade = nomeQuantidadeMap.getOrDefault(nome, 0);
-	        nomeQuantidadeMap.put(nome, quantidade + 1);
-	    }
-	    
-	    for (Produto snack : Snacks) {
-	        String nome = snack.getNome();
-	        int quantidade = nomeQuantidadeMap.getOrDefault(nome, 0);
-	        nomeQuantidadeMap.put(nome, quantidade + 1);
-	    }
-	    
-	    for (Produto cosmetico : Cosmeticos) {
-	        String nome = cosmetico.getNome();
-	        int quantidade = nomeQuantidadeMap.getOrDefault(nome, 0);
-	        nomeQuantidadeMap.put(nome, quantidade + 1);
-	    }
-	    
-	    // Exibe os nomes e preços dos produtos com suas quantidades
-	    for (Map.Entry<String, Integer> entry : nomeQuantidadeMap.entrySet()) {
-	        String nome = entry.getKey(); // Obtém a chave (nome do produto) do mapa
-	        int quantidade = entry.getValue(); // Obtém o valor (quantidade do produto) do mapa
-	        
-	        // Percorre cada lista de produtos para encontrar o produto com o nome correspondente e exibir seu preço
-	        for (Produto produto : Medicamentos) {
-	            if (produto.getNome().equals(nome)) {
-	                System.out.println(nome + " (" + quantidade + "): R$" + produto.getPreco());
-	                break;
-	            }
-	        }
-	        for (Produto produto : Acessorios) {
-	            if (produto.getNome().equals(nome)) {
-	                System.out.println(nome + " (" + quantidade + "): R$" + produto.getPreco());
-	                break;
-	            }
-	        }
-	        for (Produto produto : GiftCards) {
-	            if (produto.getNome().equals(nome)) {
-	                System.out.println(nome + " (" + quantidade + "): R$" + produto.getPreco());
-	                break;
-	            }
-	        }
-	        for (Produto produto : Snacks) {
-	            if (produto.getNome().equals(nome)) {
-	                System.out.println(nome + " (" + quantidade + "): R$" + produto.getPreco());
-	                break;
-	            }
-	        }
-	        for (Produto produto : Cosmeticos) {
-	            if (produto.getNome().equals(nome)) {
-	                System.out.println(nome + " (" + quantidade + "): R$" + produto.getPreco());
-	                break;
-	            }
-	        }
 	    }
 	}
 
+	private String formatarPreco(double preco) {
+	    DecimalFormat df = new DecimalFormat("#.00");
+	    return df.format(preco);
+	}
+
+	public boolean verificarProduto(List<Produto> produtos, Produto produto) {
+	    try {
+	        return produtos.contains(produto);
+	    } catch (NullPointerException e) {
+	        System.out.println("Lista de produtos é nula.");
+	        return false;
+	    }
+	}
 	
 	 public void atualizarQtd() {
 		 	qtdMedicamento = Medicamentos.size();
@@ -247,158 +362,157 @@ public class Estoque implements GestorEstoque {
 		 	qtdAcessorio = Acessorios.size();
 		 	qtdGiftCard = GiftCards.size();
 	    }
-	
-	public boolean adicionarMedicamento(Produto medicamento) {
-	    if (verificarCodigo(medicamento.getId())) {
-	        System.out.println("Código já existe. Adição não é possível.");
-	        return false;
-	    }
 
-	    Medicamentos.add(medicamento);
-	    ((Medicamento) medicamento).setEstoque(this); // Configurando o estoque no medicamento adicionado
+	 public boolean adicionarProduto(Produto produto) {
+		    try {
+		        if (produto instanceof Medicamento) {
+		            Medicamento medicamento = (Medicamento) produto;
+		            medicamento.setEstoque(this);
+		            for (int i = 0; i < medicamento.getQuantidade(); i++) {
+		                Medicamentos.add(medicamento);
+		            }
+		            qtdMedicamento += medicamento.getQuantidade();
+		            System.out.println("Medicamento adicionado com sucesso!");
+		        } else if (produto instanceof Acessorio) {
+		            Acessorio acessorio = (Acessorio) produto;
+		            acessorio.setEstoque(this);
+		            for (int i = 0; i < acessorio.getQuantidade(); i++) {
+		                Acessorios.add(acessorio);
+		            }
+		            qtdAcessorio += acessorio.getQuantidade();
+		            System.out.println("Acessório adicionado com sucesso!");
+		        } else if (produto instanceof Cosmetico) {
+		            Cosmetico cosmetico = (Cosmetico) produto;
+		            cosmetico.setEstoque(this);
+		            for (int i = 0; i < cosmetico.getQuantidade(); i++) {
+		                Cosmeticos.add(cosmetico);
+		            }
+		            qtdCosmetico += cosmetico.getQuantidade();
+		            System.out.println("Cosmético adicionado com sucesso!");
+		        } else if (produto instanceof GiftCard) {
+		            GiftCard giftCard = (GiftCard) produto;
+		            giftCard.setEstoque(this);
+		            for (int i = 0; i < giftCard.getQuantidade(); i++) {
+		                GiftCards.add(giftCard);
+		            }
+		            qtdGiftCard += giftCard.getQuantidade();
+		            System.out.println("GiftCard adicionado com sucesso!");
+		        } else if (produto instanceof Snack) {
+		            Snack snack = (Snack) produto;
+		            snack.setEstoque(this);
+		            for (int i = 0; i < snack.getQuantidade(); i++) {
+		                Snacks.add(snack);
+		            }
+		            qtdSnack += snack.getQuantidade();
+		            System.out.println("Snack adicionado com sucesso!");
+		        } else {
+		            System.out.println("Tipo de produto desconhecido. Adição não é possível.");
+		            return false;
+		        }
 
-	    System.out.println("Medicamento adicionado com sucesso!");
-	    qtdMedicamento++;
-	    return true;
-	};
-	
-	public boolean verificarMedicamento(Produto medicamento) {
-		return Medicamentos.contains(medicamento);
-    }
-	
-	public boolean removerMedicamento(int codigoMedicamento) {
-		for (Produto medicamento : Medicamentos) {
-			if(medicamento.getId() == codigoMedicamento) {
-				Medicamentos.remove(medicamento);
-				System.out.println("O Medicamento "+ medicamento.getNome() + " foi removido com sucesso!");
-				atualizarQtd();
-				return true;
-			}
+		        return true;
+		    } catch (NullPointerException e) {
+		        System.out.println("Ocorreu uma exceção durante a adição do produto: " + e.getMessage());
+		        return false;
+		    }
 		}
-		System.out.println("O código " + codigoMedicamento + " não foi encontrado.");
-		return false;
-	};
-	
-	public boolean adicionarAcessorio(Produto acessorio) {
-		if (verificarCodigo(acessorio.getId())) {
-			System.out.println("Código já existe. Adição não é possível.");
-			acessorio = null;
-			return false;
+
+	 
+	 public boolean removerProduto(String nomeProduto, int quantidade) {
+		    Produto produtoRemovido = null;
+
+		    try {
+		        // Procura o produto nas diferentes listas
+		        for (Produto produto : Medicamentos) {
+		            if (produto.getNome().equals(nomeProduto)) {
+		                if (quantidade > produto.getQuantidade()) {
+		                    System.out.println("Quantidade solicitada é maior do que a disponível no estoque!");
+		                    return false;
+		                }
+		                produtoRemovido = produto;
+		                produto.setQuantidade(produto.getQuantidade() - quantidade);
+		                if (produto.getQuantidade() <= 0) {
+		                    Medicamentos.remove(produto);
+		                }
+		                break;
+		            }
+		        }
+
+		        for (Produto produto : Acessorios) {
+		            if (produto.getNome().equals(nomeProduto)) {
+		                if (quantidade > produto.getQuantidade()) {
+		                    System.out.println("Quantidade solicitada é maior do que a disponível no estoque!");
+		                    return false;
+		                }
+		                produtoRemovido = produto;
+		                produto.setQuantidade(produto.getQuantidade() - quantidade);
+		                if (produto.getQuantidade() <= 0) {
+		                    Acessorios.remove(produto);
+		                }
+		                break;
+		            }
+		        }
+
+		        for (Produto produto : GiftCards) {
+		            if (produto.getNome().equals(nomeProduto)) {
+		                if (quantidade > produto.getQuantidade()) {
+		                    System.out.println("Quantidade solicitada é maior do que a disponível no estoque!");
+		                    return false;
+		                }
+		                produtoRemovido = produto;
+		                produto.setQuantidade(produto.getQuantidade() - quantidade);
+		                if (produto.getQuantidade() <= 0) {
+		                    GiftCards.remove(produto);
+		                }
+		                break;
+		            }
+		        }
+
+		        for (Produto produto : Snacks) {
+		            if (produto.getNome().equals(nomeProduto)) {
+		                if (quantidade > produto.getQuantidade()) {
+		                    System.out.println("Quantidade solicitada é maior do que a disponível no estoque!");
+		                    return false;
+		                }
+		                produtoRemovido = produto;
+		                produto.setQuantidade(produto.getQuantidade() - quantidade);
+		                if (produto.getQuantidade() <= 0) {
+		                    Snacks.remove(produto);
+		                }
+		                break;
+		            }
+		        }
+
+		        for (Produto produto : Cosmeticos) {
+		            if (produto.getNome().equals(nomeProduto)) {
+		                if (quantidade > produto.getQuantidade()) {
+		                    System.out.println("Quantidade solicitada é maior do que a disponível no estoque!");
+		                    return false;
+		                }
+		                produtoRemovido = produto;
+		                produto.setQuantidade(produto.getQuantidade() - quantidade);
+		                if (produto.getQuantidade() <= 0) {
+		                    Cosmeticos.remove(produto);
+		                }
+		                break;
+		            }
+		        }
+
+		        if (produtoRemovido != null) {
+		            atualizarQtd();
+		            return true;
+		        } else {
+		            System.out.println("O produto " + nomeProduto + " não foi encontrado.");
+		            return false;
+		        }
+		    } catch (Exception e) {
+		        System.out.println("Ocorreu um erro ao remover a quantidade do produto: " + e.getMessage());
+		        return false;
+		    }
 		}
-		Acessorios.add(acessorio);
-		((Acessorio) acessorio).setEstoque(this); // Configurando o estoque no acessorio adicionado
-		
-		System.out.println("Acessório adicionado com sucesso!");
-		qtdAcessorio++;
-		return true;
-	}
-	
-	public boolean verificarAcessorio(Produto acessorio) {
-        return Acessorios.contains(acessorio);
-    }
-	
-	public boolean removerAcessorio(int codigoAcessorio) {
-		for(Produto acessorio : Acessorios) {
-			if(acessorio.getId() == codigoAcessorio) {
-				Acessorios.remove(acessorio);
-				System.out.println("O acessório "+ acessorio.getNome() + " foi removido com sucesso!");
-				atualizarQtd();
-				return true;
-			}
-		}
-		System.out.println("O código "+ codigoAcessorio +" não foi encontrado.");
-		return false;
-	}
-	
-	public boolean adicionarCosmetico(Produto cosmetico) {
-		if (verificarCodigo(cosmetico.getId())) {
-			System.out.println("Código já existe. Adição não é possível.");
-			return false;
-		}
-		Cosmeticos.add(cosmetico);
-		((Cosmetico) cosmetico).setEstoque(this); // Configurando o estoque no cosmetico adicionado
-		
-		System.out.println("Cosmético adicionado com sucesso!");
-		qtdCosmetico++;
-		return true;
-	}
-	
-	public boolean verificarCosmetico(Produto cosmetico) {
-       return Cosmeticos.contains(cosmetico);
-    }
-	
-	public boolean removerCosmetico(int codigoCosmetico) {
-		for(Produto cosmetico : Cosmeticos) {
-			if(cosmetico.getId() == codigoCosmetico) {
-				Cosmeticos.remove(cosmetico);
-				System.out.println("O cosmético "+ cosmetico.getNome() +" foi removido com sucesso!");
-				atualizarQtd();
-				return true;
-			}
-		}
-		System.out.println("O código "+ codigoCosmetico +" não foi encontrado.");
-		return false;
-	}
-	
-	public boolean adicionarGiftCard(Produto giftCard) {
-		if (verificarCodigo(giftCard.getId())) {
-			System.out.println("Código já existe. Adição não é possível.");
-			return false;
-		}
-		GiftCards.add(giftCard);
-		((GiftCard) giftCard).setEstoque(this); // Configurando o estoque no GiftCard adicionado
-		
-		System.out.println("GiftCard adicionado com sucesso!");
-		qtdGiftCard++;
-		return true;
-	}
-	
-	public boolean verificarGiftCard(Produto giftCard) {
-		return GiftCards.contains(giftCard);
-    }
-	
-	public boolean removerGiftCard(int codigoGiftCard) {
-		for(Produto giftCard : GiftCards) {
-			if(giftCard.getId() == codigoGiftCard) {
-				GiftCards.remove(giftCard);
-				System.out.println("O GiftCard "+ giftCard.getNome() +" foi removido com sucesso!");
-				atualizarQtd();
-				return true;
-			}
-		}
-		System.out.println("O código "+ codigoGiftCard +" não foi encontrado.");
-		return false;
-	}
-	
-	public boolean adicionarSnack(Produto snack) {
-		if (verificarCodigo(snack.getId())) {
-			System.out.println("Código já existe. Adição não é possível.");
-			return false;
-		}
-		Snacks.add(snack);
-		((Snack) snack).setEstoque(this); // Configurando o estoque no Snack adicionado
-		
-		System.out.println("Snack adicionado com sucesso!");
-		qtdSnack++;
-		return true;
-	}
-	
-	public boolean verificarSnack(Produto snack) {
-		return Snacks.contains(snack);
-    }
-	
-	public boolean removerSnack(int codigoSnack) {
-		for (Produto snack : Snacks) {
-			if(snack.getId() == codigoSnack) {
-				Snacks.remove(snack);
-				System.out.println("O Snack "+ snack.getNome() + " foi removido com sucesso!");
-				atualizarQtd();
-				return true;
-			}
-		}
-		System.out.println("O código "+ codigoSnack +" não foi encontrado.");
-		return false;
-	}
+
+
+
 	
 	public void exibirQtd() {
 		System.out.println("Quantidade de Medicamentos: " + getQtdMedicamento());

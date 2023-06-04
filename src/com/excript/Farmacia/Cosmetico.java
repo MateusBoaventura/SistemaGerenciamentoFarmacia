@@ -9,8 +9,8 @@ public class Cosmetico extends Produto {
 	private String descricao;
 	private Estoque estoque;
 	
-	public Cosmetico(String nome, String empresa, int id, double preco, categoria categoria, String descricao, String dataFabricacao, String dataValidade) {
-		super(nome, empresa, id, preco, dataFabricacao, dataValidade);
+	public Cosmetico(String nome, String empresa, int id, double preco, categoria categoria, String descricao, String dataFabricacao, String dataValidade, int quantidade) {
+		super(nome, empresa, id, preco, dataFabricacao, dataValidade, quantidade);
 		this.categoria = categoria;
 		this.descricao = descricao;
 	}
@@ -47,7 +47,7 @@ public class Cosmetico extends Produto {
 	
 	@Override
     public void MostrarDados(Estoque estoque) {
-        if (estoque.verificarCosmetico(this)) {
+        if (estoque.verificarProduto(estoque.getCosmeticos(), this)) {
         	System.out.println("Nome: " + getNome());
             System.out.println("Empresa: " + getEmpresa());
             System.out.println("Categoria: " + getCategoria());
@@ -66,5 +66,4 @@ public class Cosmetico extends Produto {
 	        System.out.println("O Cosmético não está no estoque.");
 	    }
     }
-	
 }

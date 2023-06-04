@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Venda implements FuncoesVenda {
@@ -82,30 +83,58 @@ public class Venda implements FuncoesVenda {
     }
 
     public void adicionarProduto(Produto produto) {
-        if (produto.estaVencido()) {
-            System.out.println("ATENÇÃO: O produto " + produto.getNome() + " está vencido!");
-            System.out.println("Deseja adicionar mesmo assim? (S/N)");
-            String resposta = scanner.nextLine();
+        try {
+            if (produto.estaVencido()) {
+                System.out.println("ATENÇÃO: O produto " + produto.getNome() + " está vencido!");
+                System.out.println("Deseja adicionar mesmo assim? (S/N)");
+                String resposta = scanner.nextLine();
 
-            if (resposta.equalsIgnoreCase("N")) {
-                System.out.println("Produto não adicionado ao carrinho.");
-                return;
+                if (resposta.equalsIgnoreCase("N")) {
+                    System.out.println("Produto não adicionado ao carrinho.");
+                    return;
+                }
             }
-        }
-        
-        if (produto instanceof Medicamento) {
-            if (!verificarReceita(produto)) {
-                System.out.println("Produto não adicionado ao carrinho.");
-                return;
+
+            if (produto instanceof Medicamento) {
+                if (!verificarReceita(produto)) {
+                    System.out.println("Produto não adicionado ao carrinho.");
+                    return;
+                }
             }
-        }
-        if (estoque.verificarDisponibilidade(produto)) {
-            carrinho.add(produto);
-            valorTotal += produto.getPreco();
-            estoque.adicionarCarrinho(produto);
-            cliente.getPontos().adicionarPontos(calcularPontos(produto.getPreco()));
+
+            while (true) {
+                System.out.println("Digite a quantidade do produto a ser adicionada ao carrinho:");
+                System.out.println("Produto: " + produto.getNome() + " (" + estoque.quantidadeDisponivel(produto) + ")");
+
+                try {
+                    int quantidade = scanner.nextInt();
+                    scanner.nextLine(); // Limpar o buffer do scanner
+
+                    if (quantidade <= 0) {
+                        System.out.println("Quantidade inválida. Digite um valor positivo maior que zero.");
+                    } else if (!estoque.verificarDisponibilidade(produto, quantidade)) {
+                        System.out.println("Quantidade indisponível. Apenas " + estoque.quantidadeDisponivel(produto) + " unidades de " + produto.getNome() + " estão disponíveis no estoque.");
+                    } else {
+                        for (int i = 0; i < quantidade; i++) {
+                            carrinho.add(produto); // Adiciona o produto ao carrinho para cada unidade especificada
+                        }
+                        produto.setQuantidade(quantidade); // Define a quantidade correta no produto
+                        valorTotal += produto.getPreco() * quantidade;
+                        estoque.adicionarCarrinho(produto, quantidade);
+                        cliente.getPontos().adicionarPontos(calcularPontos(produto.getPreco() * quantidade)); // Atualiza os pontos do cliente considerando a quantidade
+                        estoque.atualizarQtd();
+                        return;
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.println("Entrada inválida. Digite um número válido.");
+                    scanner.nextLine(); // Limpar o buffer do scanner
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Ocorreu um erro ao adicionar o produto: " + e.getMessage());
         }
     }
+
 
     private int calcularPontos(double valor) {
         int pontos = 0;
@@ -127,17 +156,22 @@ public class Venda implements FuncoesVenda {
     }
 
     public void exibirCarrinho(Cliente cliente) {
-        System.out.println("Seus itens no carrinho: \n");
+        System.out.println("Seus itens no carrinho:\n");
         ArrayList<String> nomesQuantidades = new ArrayList<>();
+        
         for (Produto produto : carrinho) {
             String nome = produto.getNome();
             int quantidade = 0;
+            
             for (Produto p : carrinho) {
                 if (p.getNome().equals(nome)) {
                     quantidade++;
                 }
+                
             }
+            
             String nomeQuantidade = nome + " (" + quantidade + ")";
+            
             if (!nomesQuantidades.contains(nomeQuantidade)) {
                 nomesQuantidades.add(nomeQuantidade);
                 System.out.println(nomeQuantidade);
@@ -163,62 +197,82 @@ public class Venda implements FuncoesVenda {
 
     
     public void finalizarVenda(Cliente cliente) {
-    	SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy 'Horário:' HH:mm:ss"); // Formatando a data/horario
-        String dataFormatada = formatoData.format(getDataVenda()); //Criando uma string que vai receber a nova data 
+        try {
+            SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy 'Horário:' HH:mm:ss"); // Formatando a data/horario
+            String dataFormatada = formatoData.format(getDataVenda()); //Criando uma string que vai receber a nova data 
 
-        System.out.println("Recibo da venda:");
-        System.out.println("ID da venda: " + getIdVenda());
-        System.out.println("Data da venda: " + dataFormatada);
-        System.out.println("Produtos comprados:");
-        for (Produto produto : carrinho) {
-            System.out.println(produto.getNome() + " - Preço: R$" + produto.getPreco());   
-            
-            if (produto instanceof GiftCard) { // Verifica se o produto é um GiftCard
-                GiftCard giftCard = (GiftCard) produto; // Faz o cast para GiftCard
+            System.out.println("Recibo da venda:");
+            System.out.println("ID da venda: " + getIdVenda());
+            System.out.println("Data da venda: " + dataFormatada);
+            System.out.println("Produtos comprados:");
 
-                if (!giftCard.isAtivo()) { // Verifica se o GiftCard ainda não está ativado
-                    giftCard.ativarGiftCard(); // Ativa o GiftCard
-                    System.out.println("GiftCard ativado! Código: " + giftCard.getCodigo());
+            for (Produto produto : carrinho) {
+                System.out.println(produto.getNome() + " - Preço: R$" + produto.getPreco());
+
+                if (produto instanceof GiftCard) { // Verifica se o produto é um GiftCard
+                    GiftCard giftCard = (GiftCard) produto; // Faz o cast para GiftCard
+
+                    if (!giftCard.isAtivo()) { // Verifica se o GiftCard ainda não está ativado
+                        giftCard.ativarGiftCard(); // Ativa o GiftCard
+                        System.out.println("GiftCard ativado! Código: " + giftCard.getCodigo());
+                    }
                 }
+
+                // Remover a quantidade do produto vendida do estoque
+                estoque.removerProduto(produto.getNome(), produto.getQuantidade());
             }
+
+            System.out.println("");
+            DecimalFormat decimalFormat = new DecimalFormat("#.00"); // Instanciando para que o dinheiro apenas exiba 2 casas decimais depois da vírgula
+            String valorFormatado = decimalFormat.format(getValorTotal()); // Criando uma string que vai receber o getValorTotal() no formato do decimalFormat
+            System.out.println("Valor total da venda: R$" + valorFormatado); // Ele exibe o valorFormatado, ao invés do getValorTotal(), para evitar várias casas depois da vírgula.
+
+            int pontosCliente = cliente.getPontos().getPontos();
+            System.out.println("Pontos acumulados: " + pontosCliente);
+
+            if (pontosCliente >= 100) {
+                System.out.println("Deseja utilizar os pontos acumulados? (S/N)");
+                String resposta = scanner.nextLine();
+
+                if (resposta.equalsIgnoreCase("S")) {
+                    double desconto = cliente.getPontos().getDesconto();
+                    double valorComDesconto = getValorTotal() - (getValorTotal() * desconto);
+
+                    System.out.println("Desconto aplicado: " + (desconto * 100) + "%");
+                    String valorFormato = String.format("%.2f", valorComDesconto);
+                    System.out.println("Valor total com desconto: R$" + valorFormato);
+                    cliente.getPontos().setPontos(pontosCliente - 100);
+                    cliente.mostrarPontos();
+
+                    valorTotalVendas += valorComDesconto;
+                } else {
+                    System.out.println("Valor total da venda: R$" + getValorTotal());
+                    valorTotalVendas += getValorTotal();
+                    cliente.mostrarPontos();
+                }
+            } else {
+                valorTotalVendas += getValorTotal();
+            }
+
+            // Remover os produtos do carrinho após a venda
+            carrinho.clear();
+
+            System.out.println("OBRIGADO POR COMPRAR EM NOSSA FARMÁCIA!");
+        } catch (Exception e) {
+            System.out.println("Ocorreu um erro ao finalizar a venda.");
+            e.printStackTrace();
         }
-        
-        System.out.println("");
-        DecimalFormat decimalFormat = new DecimalFormat("#.00"); // Instanciando para que o dinheiro apenas exiba 2 casas decimais depois da virgula
-        String valorFormatado = decimalFormat.format(getValorTotal()); // Criando uma string que vai receber o getValorTotal() no formato do decimalFormat
-        System.out.println("Valor total da venda: R$" + valorFormatado); // Ele exibe o valorFormatado, ao invés do getValorTotal(), para evitar várias casas depois da vírgula.
-        
-        int pontosCliente = cliente.getPontos().getPontos();
-        System.out.println("Pontos acumulados: " + pontosCliente);
-        if (pontosCliente >= 100) {
-            System.out.println("Deseja utilizar os pontos acumulados? (S/N)");
-            String resposta = scanner.nextLine();
+    }
 
-            if (resposta.equalsIgnoreCase("S")) {
-                double desconto = cliente.getPontos().getDesconto();
-                double valorComDesconto = getValorTotal() - (getValorTotal() * desconto);
-
-                System.out.println("Desconto aplicado: " + (desconto * 100) + "%");
-                String valorFormato = String.format("%.2f", valorComDesconto);
-                System.out.println("Valor total com desconto: R$" + valorFormato);
-                cliente.getPontos().setPontos(pontosCliente - 100);
-                cliente.mostrarPontos();
-
-                valorTotalVendas += valorComDesconto;
-            }	else {
-                	System.out.println("Valor total da venda: R$" + getValorTotal());
-                	valorTotalVendas += getValorTotal();
-                	cliente.mostrarPontos();
-            	} 
-        	}else {
-        		valorTotalVendas += getValorTotal();
-        	}
-        System.out.println("OBRIGADO POR COMPRAR EM NOSSA FARMACIA!");
-    	}
 
 
     public void exibirTotalVendas() {
-    	String valorTotalFormatado = String.format("%.2f", valorTotalVendas);
-        System.out.println("Valor total de todas as vendas: R$" + valorTotalFormatado);
+    	try {
+    		String valorTotalFormatado = String.format("%.2f", valorTotalVendas);
+    		System.out.println("Valor total de todas as vendas: R$" + valorTotalFormatado);
+    } catch (Exception e) {
+    	System.out.println("Ocorreu um erro ao exibir o valor total de todas as vendas");
+    	e.printStackTrace();
+    	}
     }
 }

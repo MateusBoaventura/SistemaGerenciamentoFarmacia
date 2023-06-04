@@ -12,8 +12,8 @@ public class GiftCard extends Produto {
 	private long codigo;
 	private boolean ativo;
 	
-	public GiftCard(String nome, String empresa, int id, double preco, long codigo, boolean ativo, String dataFabricacao, String dataValidade) {
-		super(nome, empresa, id, preco, dataFabricacao, dataValidade);
+	public GiftCard(String nome, String empresa, int id, double preco, long codigo, boolean ativo, String dataFabricacao, String dataValidade, int quantidade) {
+		super(nome, empresa, id, preco, dataFabricacao, dataValidade, quantidade);
 		this.codigo = codigo;
 		this.ativo = false;
 		this.estoque = null;
@@ -50,7 +50,7 @@ public class GiftCard extends Produto {
 	
 	@Override
 	    public void MostrarDados(Estoque estoque) {
-	        if (estoque.verificarGiftCard(this)) {
+	        if (estoque.verificarProduto(estoque.getGiftCards(), this)) {
 	        	System.out.println("Nome: " + getNome());
 	            System.out.println("Empresa: " + getEmpresa());
 	            System.out.println("Id: " + getId());
@@ -69,5 +69,4 @@ public class GiftCard extends Produto {
 		        System.out.println("O GiftCard não está no estoque.");
 		    }
 	    }
-	
-}
+	}

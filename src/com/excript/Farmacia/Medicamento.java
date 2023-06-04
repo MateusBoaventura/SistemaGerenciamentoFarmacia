@@ -9,8 +9,8 @@ public class Medicamento extends Produto implements FuncoesMedicamento{
 	private boolean eReceita, eGenerico;
 	private Estoque estoque;
 		
-	public Medicamento(String nome, String empresa, int peso, int id, double preco, boolean eReceita, boolean eGenerico, String dataFabricacao, String dataValidade) {
-		super(nome, empresa, id, preco, dataFabricacao, dataValidade);
+	public Medicamento(String nome, String empresa, int peso, int id, double preco, boolean eReceita, boolean eGenerico, String dataFabricacao, String dataValidade, int quantidade) {
+		super(nome, empresa, id, preco, dataFabricacao, dataValidade, quantidade);
 		this.peso = peso;
 		this.eReceita = eReceita;
 		this.eGenerico = eGenerico;
@@ -57,7 +57,7 @@ public class Medicamento extends Produto implements FuncoesMedicamento{
 	
 	 @Override
 	    public void MostrarDados(Estoque estoque) {
-	        if (estoque.verificarMedicamento(this)) {
+	        if (estoque.verificarProduto(estoque.getMedicamentos(), this)) {
 	            System.out.println("Nome: " + getNome());
 	            System.out.println("Empresa: " + getEmpresa());
 	            System.out.println("Receita: " + (iseReceita() ? "Sim" : "Não"));

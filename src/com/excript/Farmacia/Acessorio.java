@@ -6,8 +6,8 @@ import java.time.format.DateTimeFormatter;
 public class Acessorio extends Produto {
     private Estoque estoque;
 
-    public Acessorio(String nome, String empresa, int id, double preco, String dataFabricacao, String dataValidade) {
-        super(nome, empresa, id, preco, dataFabricacao, dataValidade);
+    public Acessorio(String nome, String empresa, int id, double preco, String dataFabricacao, String dataValidade, int quantidade) {
+        super(nome, empresa, id, preco, dataFabricacao, dataValidade, quantidade);
     }
 
 	
@@ -26,7 +26,7 @@ public class Acessorio extends Produto {
 
 	@Override
 	public void MostrarDados(Estoque estoque) {
-	    if (estoque.verificarAcessorio(this)) {
+	    if (estoque.verificarProduto(estoque.getAcessorios(), this)) {
 	        System.out.println("Nome: " + getNome());
 	        System.out.println("Empresa: " + getEmpresa());
 	        System.out.println("Id: " + getId());
@@ -43,7 +43,4 @@ public class Acessorio extends Produto {
 	        System.out.println("O Acessório não está no estoque.");
 	    }
 	}
-
-
-	
 }
