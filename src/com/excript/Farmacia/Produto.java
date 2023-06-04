@@ -1,14 +1,18 @@
 package com.excript.Farmacia;
 
+// Criando uma classe abstrata produto porque ela é o padrão para todos os produtos que teremos na farmacia
+// A classe implementa a interface FuncoesProduto
 public abstract class Produto implements FuncoesProduto {
 	
+	// Atribuindo atributos
 	private String nome, empresa;
 	private int id;
 	private double preco;
-	private String dataFabricacao;
-	private String dataValidade;
+	private String dataFabricacao; // A data será passada em string, para que a funcao estaVencido() funcione corretamente
+	private String dataValidade; // //A data será passada em string, para que a funcao estaVencido() funcione corretamente
 	private int quantidade;
 
+	// Criando o básico de um construtor Produto
 	Produto(String nome, String empresa, int id, double preco, String dataFabricacao, String dataValidade, int quantidade) {
 	    this.nome = nome;
 	    this.empresa = empresa;
@@ -19,7 +23,7 @@ public abstract class Produto implements FuncoesProduto {
 	    this.quantidade = quantidade;
 	}
 
-
+	//Getters e setters
 	public String getNome() {
 		return nome;
 	}
@@ -63,7 +67,7 @@ public abstract class Produto implements FuncoesProduto {
 		this.quantidade = quantidade;
 	}
 
-
+	//Métodos abstratos pois serão implementados nas classes-filhas
 	public abstract void MostrarDados(Estoque estoque);
 	
 	public abstract boolean estaVencido();

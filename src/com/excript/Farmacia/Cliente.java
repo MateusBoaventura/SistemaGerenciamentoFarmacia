@@ -1,11 +1,13 @@
 package com.excript.Farmacia;
 
+	// Criando a classe Cliente com seus atributos, getters e setters e funcoes
 public class Cliente {
     private String nome;
     private String telefone;
     private String email;
     private Pontos pontos;
 
+    // Construtor
     public Cliente(String nome, String telefone, String email, Pontos pontos) {
         this.nome = nome;
         this.telefone = telefone;
@@ -45,10 +47,12 @@ public class Cliente {
         this.pontos = pontos;
     }
     
+    // Ele mostra quantos pontos tem o cliente, pegando o valor lá da classe Pontos
     public void mostrarPontos() {
         System.out.println("Pontos acumulados: " + pontos.getPontos());
     }
     
+    // Mostrando os dados do cliente
     public void mostrarDados() {
         System.out.println("Nome: " + nome);
         System.out.println("Telefone: " + telefone);

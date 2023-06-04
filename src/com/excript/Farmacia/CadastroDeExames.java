@@ -1,10 +1,11 @@
 package com.excript.Farmacia;
 
-import java.util.ArrayList;
+import java.util.ArrayList; // Importando uma arrayList
 
 public class CadastroDeExames {
-	ArrayList<Exame> listaExame = new ArrayList<Exame>();
+	ArrayList<Exame> listaExame = new ArrayList<Exame>(); // Criando uma lista de Exames
 	
+	// Funcao para checar o horário
 	public boolean checaHorario(Exame exame) {
 		for (int i = 0; i < listaExame.size(); i++) {
 			Exame compara = listaExame.get(i);

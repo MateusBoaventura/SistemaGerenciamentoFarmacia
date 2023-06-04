@@ -1,16 +1,17 @@
 package com.excript.Farmacia;
 
+//Importando as devidas bibliotecas para fazer o sistema de data:
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Snack extends Produto{
 	
-	//Data de validade
-	private categoria categoria;
-	private Estoque estoque;
-	private String descricao;
-	int qtdEmbalagem; //Quantidade em uma embalagem
+	private categoria categoria; // Este produto pode ser dividido em várias categorias
+	private Estoque estoque; // O Produto Snack estará no estoque da nossa farmácia
+	private String descricao; // Este produto possui uma descrição
+	int qtdEmbalagem; // Quantidade em uma embalagem
 	
+	// Criando seu construtor
 	public Snack(String nome, String empresa, int id, double preco, categoria categoria, String descricao, int qtdEmbalagem, String dataFabricacao, String dataValidade, int quantidade) {
 		super(nome, empresa, id, preco, dataFabricacao, dataValidade, quantidade);
 		this.categoria = categoria;
@@ -18,6 +19,7 @@ public class Snack extends Produto{
 		this.qtdEmbalagem = qtdEmbalagem;
 	}
 	
+	// Getters e Setters
 	public categoria getCategoria() {
 		return categoria;
 	}
@@ -43,17 +45,19 @@ public class Snack extends Produto{
 		this.qtdEmbalagem = qtdEmbalagem;
 	}
 
-
+	// Criando um enum categoria, um enum serve para definir um conjunto fixo de constantes nomeadas
 	public enum categoria{
-		SALGADINHO, BISCOITO, BARRA_DE_CEREAL, CHOCOLATE;
+		SALGADINHO, BISCOITO, BARRA_DE_CEREAL, CHOCOLATE; 
 	}
 	
+	// A explicação desta função de forma detalhada está na classe Acessorio
 	public boolean estaVencido() {
 	    LocalDate dataAtual = LocalDate.now();
 	    LocalDate dataValidadeFormatada = LocalDate.parse(getDataValidade(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 	    return dataValidadeFormatada.isBefore(dataAtual);
 	}
 	
+	// A explicação desta função de forma detalhada está na classe Acessorio
 	 @Override
 	    public void MostrarDados(Estoque estoque) {
 	        if (estoque.verificarProduto(estoque.getSnacks(), this)) {

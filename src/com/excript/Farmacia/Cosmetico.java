@@ -1,20 +1,23 @@
 package com.excript.Farmacia;
 
+//Importando as devidas bibliotecas para fazer o sistema de data:
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Cosmetico extends Produto {
 	
-	private categoria categoria;
-	private String descricao;
-	private Estoque estoque;
+	private categoria categoria; // Este produto pode ser dividido em várias categorias
+	private String descricao; // Este produto possui uma descrição
+	private Estoque estoque; // O Produto Cosmetico estará no estoque da nossa farmácia
 	
+	// Criando seu construtor
 	public Cosmetico(String nome, String empresa, int id, double preco, categoria categoria, String descricao, String dataFabricacao, String dataValidade, int quantidade) {
 		super(nome, empresa, id, preco, dataFabricacao, dataValidade, quantidade);
 		this.categoria = categoria;
 		this.descricao = descricao;
 	}
 
+	// Getters e Setters
 	public categoria getCategoria() {
 		return categoria;
 	}
@@ -34,17 +37,20 @@ public class Cosmetico extends Produto {
 		this.estoque = estoque;
 	}
 
-
+	
+	// Criando um enum categoria, um enum serve para definir um conjunto fixo de constantes nomeadas
 	public enum categoria{
-		MAQUIAGEM, CUIDADOS_PELE, CUIDADOS_CABELO, FRAGRANCIAS, OUTROS;
+		MAQUIAGEM, CUIDADOS_PELE, CUIDADOS_CABELO, FRAGRANCIAS, OUTROS; // Criando essas categorias de cosméticos
 	}
 	
+	// A explicação desta função de forma detalhada está na classe Acessorio
 	public boolean estaVencido() {
 	    LocalDate dataAtual = LocalDate.now();
 	    LocalDate dataValidadeFormatada = LocalDate.parse(getDataValidade(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 	    return dataValidadeFormatada.isBefore(dataAtual);
 	}
 	
+	// A explicação desta função de forma detalhada está na classe Acessorio
 	@Override
     public void MostrarDados(Estoque estoque) {
         if (estoque.verificarProduto(estoque.getCosmeticos(), this)) {
