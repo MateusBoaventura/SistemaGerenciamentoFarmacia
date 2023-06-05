@@ -23,6 +23,7 @@ public class TelaLogin extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	private JPasswordField textField_1;
+	private String funcionarioLogado;
 
 	/**
 	 * Launch the application.
@@ -44,11 +45,15 @@ public class TelaLogin extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaLogin() {
+		
+		
+		
 		setTitle("Login");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 421, 367);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setLocationRelativeTo(null);
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -90,14 +95,20 @@ public class TelaLogin extends JFrame {
 
                 try {
                     if (nome.equals("Mateus") && senha.equals("123")) {
-                        JOptionPane.showMessageDialog(contentPane, "ACERTOU"); // Exibe caixa de texto com a mensagem "ACERTOU"
+                    	funcionarioLogado = "Mateus";
+                        JOptionPane.showMessageDialog(contentPane, "Olá, Mateus!"); // Exibe caixa de texto com a mensagem "ACERTOU"
                     } else if (nome.equals("Victor") && senha.equals("1234")) {
-                        JOptionPane.showMessageDialog(contentPane, "ACERTOU"); // Exibe caixa de texto com a mensagem "ACERTOU"
+                    	funcionarioLogado = "Victor";
+                        JOptionPane.showMessageDialog(contentPane, "Olá, Victor!"); // Exibe caixa de texto com a mensagem "ACERTOU"
                     } else {
                         throw new LoginInvalido(); // Lança exceção caso o login esteja incorreto
                     }
+                    
+                    TelaFuncionario telaFuncionario = new TelaFuncionario(funcionarioLogado);
+                    telaFuncionario.setVisible(true);
+                    dispose();
                 } catch (LoginInvalido ex) {
-                    JOptionPane.showMessageDialog(contentPane, "ERROU", "Erro de Login", JOptionPane.ERROR_MESSAGE); // Exibe caixa de alerta com a mensagem "ERROU"
+                    JOptionPane.showMessageDialog(contentPane, "Nome ou Senha incorretos", "Erro de Login", JOptionPane.ERROR_MESSAGE); // Exibe caixa de alerta com a mensagem "ERROU"
                 }
             }
         });
