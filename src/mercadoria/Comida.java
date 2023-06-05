@@ -10,8 +10,8 @@ public class Comida extends ProdutoPerecivel{
 		this.detalhes = new String();
 	}
 	
-	public Comida(String nome,String fabricante,int id,String dataFabricacao,String dataValidade,float calorias,String detalhes) {
-		super(nome,fabricante,id,dataFabricacao,dataValidade);
+	public Comida(String nome,String fabricante,String dataFabricacao,String dataValidade,float calorias,String detalhes) {
+		super(nome,fabricante,dataFabricacao,dataValidade);
 		this.calorias = calorias;
 		this.detalhes = detalhes;
 	}
@@ -37,6 +37,6 @@ public class Comida extends ProdutoPerecivel{
 	
 	@Override
 	public String toString() {
-		return String.format("Comida%s\nCalorias:%f\nDetalhes:%s", super.toString(),this.getCalorias(),this.getDetalhes());
+		return String.format("Comida%s\nCalorias:%.2f\nDetalhes:%s", super.toString(),this.getCalorias(),this.getDetalhes());
 	}
 }

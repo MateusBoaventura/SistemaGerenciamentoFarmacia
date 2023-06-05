@@ -2,8 +2,9 @@ package mercadoria;
 
 public class Medicamento extends ProdutoPerecivel{
 	private float peso; // Um peso, em gramas ou ml, de um medicamento é um atributo essencial
-	private boolean receita, generico; // Um medicamento pode ou ser generico, assim como pode ou nao solicitar uma receita
+	private boolean receita, generico; // Um medicamento pode ser generico, assim como pode ou nao solicitar uma receita
 	
+	// Construtor vazio
 	public Medicamento() {
 		super();
 		this.peso = 0;
@@ -11,8 +12,9 @@ public class Medicamento extends ProdutoPerecivel{
 		this.generico = true;
 	}
 	
-	public Medicamento(String nome,String fabricante,int id,String dataFabricacao,String dataValidade,float peso,boolean receita,boolean generico) {
-		super(nome,fabricante,id,dataFabricacao,dataValidade);
+	// Construtor
+	public Medicamento(String nome,String fabricante,String dataFabricacao,String dataValidade,float peso,boolean receita,boolean generico) {
+		super(nome,fabricante,dataFabricacao,dataValidade);
 		this.peso = peso;
 		this.receita = receita;
 		this.generico = generico;
@@ -48,6 +50,6 @@ public class Medicamento extends ProdutoPerecivel{
 	
 	@Override
 	public String toString() {
-		return String.format("Medicamento%s\nPeso:%f\nReceita:%b\nGenerico%b", super.toString(),this.getPeso(),this.isReceita(),this.isGenerico());
+		return String.format("Medicamento%s\nPeso:%f\nReceita:%b\nGenérico%b", super.toString(),this.getPeso(),this.isReceita(),this.isGenerico());
 	}
 }

@@ -1,87 +1,47 @@
 package mercadoria;
 
-//Importando as devidas bibliotecas para fazer o sistema de data:
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
-import com.excript.Farmacia.Estoque;
-
-public class GiftCard extends Produto {
+public class GiftCard extends ProdutoPerecivel {
 	
-	private Estoque estoque; // PQ UIRZADI? PQQQQQQQQQ?
-	private long codigo; // IRRELEVANTE PARA O VENDEDOR
-	private boolean ativo; // IRRELEVANTE PARA O VENDEDOR
-	
+	private float valor;
+	private String jogo;
 	/*TODO
 	Adicionar valor de gift card
 	Refazer os construtores
 	Adicionar o toString baseado nos outros toString
-	extender de ProdutoPerecivel
 	refazer os getters e setters
 	*/
 	
+	public GiftCard() {
+		super();
+		this.valor = 0;
+		this.jogo = new String();
+	}
 	
 	// Criando seu construtor
-	public GiftCard(String nome, String empresa, int id, double preco, long codigo, boolean ativo, String dataFabricacao, String dataValidade, int quantidade) {
-		super(nome, empresa, id, preco, dataFabricacao, dataValidade, quantidade);
-		this.codigo = codigo;
-		this.ativo = false; // Na farmacia, o giftCard naturalmente é criado desativado.
-		this.estoque = null;
-	}
-
-	// Getters e Setters
-	public long getCodigo() {
-		return codigo;
-	}
-	public void setCodigo(long codigo) {
-		this.codigo = codigo;
-	}
-	public boolean isAtivo() {
-		return ativo;
-	}
-	public void setAtivo(boolean ativo) {
-		this.ativo = ativo;
-	}	
-	 public Estoque getEstoque() {
-		return estoque;
-	}
-	public void setEstoque(Estoque estoque) {
-		this.estoque = estoque;
-	}
-
-	// Funcao basica para ativar o giftCard
-	public void ativarGiftCard() {
-		if(!ativo) ativo = true;
+	public GiftCard(String nome,String empresa,String dataFabricacao,String dataValidade,float valor,String jogo) {
+		super(nome, empresa, dataFabricacao, dataValidade);
+		this.valor = valor;
+		this.jogo = jogo;
 	}
 	
-	// A explicação desta função de forma detalhada está na classe Acessorio
-	public boolean estaVencido() {
-	    LocalDate dataAtual = LocalDate.now();
-	    LocalDate dataValidadeFormatada = LocalDate.parse(getDataValidade(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-	    return dataValidadeFormatada.isBefore(dataAtual);
+	public float getValor() {
+		return valor;
 	}
+	public void setValor(float valor) {
+		this.valor = valor;
+	}
+
 	
-	// A explicação desta função de forma detalhada está na classe Acessorio
+	public String getJogo() {
+		return jogo;
+	}
+	public void setJogo(String jogo) {
+		this.jogo = jogo;
+	}
+
 	@Override
-	    public void MostrarDados(Estoque estoque) {
-	        if (estoque.verificarProduto(estoque.getGiftCards(), this)) {
-	        	System.out.println("Nome: " + getNome());
-	            System.out.println("Empresa: " + getEmpresa());
-	            System.out.println("Id: " + getId());
-	            System.out.println("Preço: R$" + getPreco());
-	            System.out.println("Código: " + getCodigo());
-	            System.out.println("Está ativado? " + (isAtivo() ? "Sim" : "Não")); // Ele verifica se o giftCard está ativo, true retorna 'Sim', false retorna 'Nao'
-	            System.out.println("Data de Fabricação: " + getDataFabricacao());
-		        System.out.println("Data de Validade: " + getDataValidade());
-		        
-		        // As mensagens do giftCard são diferentes
-		        if (estaVencido()) {
-		            System.out.println("Status: Expirado!");
-		        } else {
-		            System.out.println("Status: Pode ser resgatado!");
-		        }
-		    } else {
-		        System.out.println("O GiftCard não está no estoque.");
-		    }
-	    }
+	public String toString() {
+		return String.format("GiftCard%s\nJogo:%s\nValor:%.2f", super.toString(),this.getJogo(),this.getValor());
 	}
+	
+}

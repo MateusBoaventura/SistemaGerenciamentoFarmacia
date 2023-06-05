@@ -1,26 +1,23 @@
 package mercadoria;
 
 // Criando uma classe abstrata produto porque ela é o padrão para todos os produtos que teremos na farmacia
-// A classe implementa a interface FuncoesProduto
 public abstract class Produto {
 	
 	// Atribuindo atributos
 	private String nome, fabricante;
-	private int id;
 	private String dataFabricacao; // A data será passada em string, para que a funcao estaVencido() funcione corretamente
 
+	// Construtor para caso não passe nada, saia vazio
 	public Produto() {
 		this.nome = new String();
 		this.fabricante = new String();
-		this.id = 0;
 		this.dataFabricacao = new String();
 	}
 	
 	// Criando o básico de um construtor Produto
-	public Produto(String nome,String empresa,int id,String dataFabricacao) {
+	public Produto(String nome,String empresa,String dataFabricacao) {
 	    this.nome = nome;
 	    this.fabricante = empresa;
-	    this.id = id;
 	    this.dataFabricacao = dataFabricacao;
 	}
 
@@ -38,13 +35,6 @@ public abstract class Produto {
 	public void setFabricante(String fabricante) {
 		this.fabricante = fabricante;
 	}
-
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
 	
 	public String getDataFabricacao() {
 		return dataFabricacao;
@@ -54,7 +44,7 @@ public abstract class Produto {
 	}
 	
 	@Override
-	public String toString() {
-		return String.format("Nome:%s\nEmpresa:%s\nID:%d\nData_Frab:%s",this.getNome(),this.getFabricante(),this.getId(),this.getDataFabricacao());
+	public String toString() { // Utilizando toString 
+		return String.format("\nNome:%s\nEmpresa:%s\nData_Frab:%s",this.getNome(),this.getFabricante(),this.getDataFabricacao()); // Exibindo info do produto
 	}
 }
