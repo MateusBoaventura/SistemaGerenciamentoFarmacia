@@ -8,7 +8,7 @@ import mercadoria.Comida;
 
 //TEMPORARIO AAAAAAAAAAAAAAAAAAAAAAAA
 
-//Paul lindao
+//Paul lindao2
 public class Main {
 	public static void main(String [] args) throws JaCadastrado, CadastroInvalido {
 		Comida c = new Comida("Leite ninho","Nestle","32/13/-2000","Ontem",8001,"Calorias sao mais de 8000!");
