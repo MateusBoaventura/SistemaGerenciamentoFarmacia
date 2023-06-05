@@ -16,11 +16,8 @@ public class Main {
 		e.atualizarQuantidade(32, 300);
 		e.cadastrarProduto(c2, 0);
 		e.atualizarQuantidade(0, 10);
-<<<<<<< HEAD
 		e.atualizarPreco(32, 20.3f);
 		System.out.println(e);
-=======
 		System.out.print(e);
->>>>>>> 0b00d0bc7690b772059b85c302641f913dcb211e
 	}
 }
