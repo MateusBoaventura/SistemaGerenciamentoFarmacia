@@ -1,6 +1,6 @@
 package com.excript.Farmacia;
 
-import mercadoria.Acessorio;
+import mercadoria.Variado;
 import mercadoria.Cosmetico;
 import mercadoria.GiftCard;
 import mercadoria.Medicamento;
@@ -57,9 +57,9 @@ public class Farmacia {
 		estoque.adicionarProduto(Pacotebatom);
 		Snack DiamanteNegro = new Snack("Diamante Negro", "EmpresaSnack", 75643, 18.9, Snack.categoria.CHOCOLATE, "Chocolate ao leite com amendoim", 1, "24/02/2023", "23/05/2023", 2);
 		estoque.adicionarProduto(DiamanteNegro);
-		Acessorio luva = new Acessorio("Luva", "EmpresaAcessorio", 23232, 4.9, "01/06/2023", "14/10/2026", 5);
+		Variado luva = new Variado("Luva", "EmpresaAcessorio", 23232, 4.9, "01/06/2023", "14/10/2026", 5);
 		estoque.adicionarProduto(luva);
-		Acessorio AcessorioCaro = new Acessorio("AcessorioCaro", "EmpresaAcessorio", 23233, 400, "01/06/2023", "16/11/2025", 5);
+		Variado AcessorioCaro = new Variado("AcessorioCaro", "EmpresaAcessorio", 23233, 400, "01/06/2023", "16/11/2025", 5);
 		estoque.adicionarProduto(AcessorioCaro);
 		GiftCard LoL = new GiftCard("LOL RIOT POINTS", "Riot Games", 321, 100, 420347138, false, "01/01/2023", "23/10/2023", 3);
 		estoque.adicionarProduto(LoL);
