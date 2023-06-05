@@ -59,18 +59,18 @@ public class Cliente {
 		this.dinheiro = dinheiro;
 	}
 	
-	public void descontoPontos() {
+	public int calculaPontos() {
 		double aux = getDinheiro();
 		// Verifica se o cliente tem pelo menos 100 reais para ganhar os 10 pontos
 		if (aux >= 100.0) {
 				pontos += 10;
-		        aux -= 100.0;
+				aux -= 100.0;
 		    }
-		    
 		// Verifica quantos pontos adicionais o cliente ganha a cada 10 reais
 		int pontosExtras = (int) (aux / 10);
 			pontos += pontosExtras;
 			aux -= pontosExtras * 10;
+			return pontos;
 	}
 	
 	public String toString() {
