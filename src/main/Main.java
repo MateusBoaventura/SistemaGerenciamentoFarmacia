@@ -18,5 +18,6 @@ public class Main {
 		e.atualizarQuantidade(32, 300);
 		e.cadastrarProduto(c2, 0);
 		e.atualizarQuantidade(0, 10);
+		System.out.print(e);
 	}
 }

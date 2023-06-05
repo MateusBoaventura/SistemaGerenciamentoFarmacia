@@ -2,7 +2,6 @@ package com.excript.Farmacia;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 import excessoes.CadastroInvalido;
 import excessoes.JaCadastrado;
