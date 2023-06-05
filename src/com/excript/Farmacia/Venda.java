@@ -8,6 +8,10 @@ import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import mercadoria.GiftCard;
+import mercadoria.Medicamento;
+import mercadoria.Produto;
+
 public class Venda implements FuncoesVenda {
 	Scanner scanner = new Scanner(System.in);
     private ArrayList<Produto> carrinho; // Criando o Carrinho de vendas, onde os produtos que estão sendo comprandos são adicionados

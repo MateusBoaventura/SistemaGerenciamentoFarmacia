@@ -1,14 +1,25 @@
-package com.excript.Farmacia;
+package mercadoria;
 
 //Importando as devidas bibliotecas para fazer o sistema de data:
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import com.excript.Farmacia.Estoque;
+
 public class GiftCard extends Produto {
 	
-	private Estoque estoque; // O Produto GiftCard estará no estoque da nossa farmácia
-	private long codigo; // O giftCard é um produto que possui um codigo unico dado pela empresa
-	private boolean ativo; // O giftCard pode ou nao estar ativado
+	private Estoque estoque; // PQ UIRZADI? PQQQQQQQQQ?
+	private long codigo; // IRRELEVANTE PARA O VENDEDOR
+	private boolean ativo; // IRRELEVANTE PARA O VENDEDOR
+	
+	/*TODO
+	Adicionar valor de gift card
+	Refazer os construtores
+	Adicionar o toString baseado nos outros toString
+	extender de ProdutoPerecivel
+	refazer os getters e setters
+	*/
+	
 	
 	// Criando seu construtor
 	public GiftCard(String nome, String empresa, int id, double preco, long codigo, boolean ativo, String dataFabricacao, String dataValidade, int quantidade) {

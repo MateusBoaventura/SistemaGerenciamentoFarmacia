@@ -1,12 +1,13 @@
-package com.excript.Farmacia;
+package mercadoria;
 
 //Importando as devidas bibliotecas para fazer o sistema de data:
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Acessorio extends Produto {
-    private Estoque estoque; // O Produto Acessorio estará no estoque da nossa farmácia
+import com.excript.Farmacia.Estoque;
 
+public class Acessorio extends Produto {
+	
     // Criando seu construtor
     public Acessorio(String nome, String empresa, int id, double preco, String dataFabricacao, String dataValidade, int quantidade) {
         super(nome, empresa, id, preco, dataFabricacao, dataValidade, quantidade);
@@ -28,7 +29,7 @@ public class Acessorio extends Produto {
 	}
 
 	@Override
-	public void MostrarDados(Estoque estoque) { // Essa função mostra todas as informações do produto, em seu parâmetro é passado de qual estoque ele está;
+	public void MostrarDados() { // Essa função mostra todas as informações do produto, em seu parâmetro é passado de qual estoque ele está;
 	    if (estoque.verificarProduto(estoque.getAcessorios(), this)) { // Ele realiza uma verificação de se o produto está no estoque correspondente
 	        System.out.println("Nome: " + getNome());
 	        System.out.println("Empresa: " + getEmpresa());

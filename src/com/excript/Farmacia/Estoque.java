@@ -4,6 +4,14 @@ package com.excript.Farmacia;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Map;
+
+import mercadoria.Acessorio;
+import mercadoria.Cosmetico;
+import mercadoria.GiftCard;
+import mercadoria.Medicamento;
+import mercadoria.Produto;
+import mercadoria.Snack;
+
 import java.util.HashMap;
 import java.util.List;
 

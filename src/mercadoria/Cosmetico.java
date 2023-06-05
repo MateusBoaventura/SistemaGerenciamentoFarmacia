@@ -1,8 +1,10 @@
-package com.excript.Farmacia;
+package mercadoria;
 
 //Importando as devidas bibliotecas para fazer o sistema de data:
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
+import com.excript.Farmacia.Estoque;
 
 public class Cosmetico extends Produto {
 	

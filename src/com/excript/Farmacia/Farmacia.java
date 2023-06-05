@@ -1,5 +1,11 @@
 package com.excript.Farmacia;
 
+import mercadoria.Acessorio;
+import mercadoria.Cosmetico;
+import mercadoria.GiftCard;
+import mercadoria.Medicamento;
+import mercadoria.Snack;
+
 public class Farmacia {
 	public static void main(String[] args) {
 		

@@ -2,6 +2,8 @@ package com.excript.Farmacia;
 
 import java.util.List;
 
+import mercadoria.Produto;
+
 public interface GestorEstoque {
 	public boolean verificarCodigo(int codigo);
 	public boolean verificarDisponibilidade(Produto produto, int quantidade);
