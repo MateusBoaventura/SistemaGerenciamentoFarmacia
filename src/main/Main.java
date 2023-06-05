@@ -13,6 +13,8 @@ import mercadoria.Cosmetico;
 import mercadoria.GiftCard;
 
 //TEMPORARIO AAAAAAAAAAAAAAAAAAAAAAAA
+
+//Paul lindao
 public class Main {
 <<<<<<< HEAD
 	public static void main(String [] args) throws JaCadastrado, CadastroInvalido {
