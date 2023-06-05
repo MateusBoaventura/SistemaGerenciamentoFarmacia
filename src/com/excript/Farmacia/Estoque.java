@@ -149,9 +149,13 @@ public class Estoque {
 	    }
 	    this.atualizarPreco(this.nomes.get(nome), preco); // Chama a função 'atualizarPreco' passando o código associado ao nome e o preço fornecido
 	}
-
 	
-	
+	public int buscarProduto(String nome) {
+		if (this.nomes.get(nome) != null) {
+			return this.nomes.get(nome);
+		}
+		return -1;
+	}
 	@Override
 	public String toString() { // Retorna uma representação em forma de String dos produtos
 		String saida = new String(); // Variável para armazenar a string

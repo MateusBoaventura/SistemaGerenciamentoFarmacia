@@ -15,6 +15,8 @@ public abstract class Produto {
 	}
 	
 	// Criando o básico de um construtor Produto
+
+	
 	public Produto(String nome,String empresa,String dataFabricacao) {
 	    this.nome = nome;
 	    this.fabricante = empresa;

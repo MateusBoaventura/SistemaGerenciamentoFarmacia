@@ -33,7 +33,6 @@ public class Farmacia {
 
 	    for (int i = 0, codigo = 0, emEstoque = 0, clienteQuer = 0; i < itens.length; i++) {
 	        codigo = (int) itens[i]; // Obtém o código do item
-	        emEstoque = this.estoque.consultarQuantidade(codigo); // Consulta a quantidade em estoque do item
 	        clienteQuer = venda.getCarrinho().get(codigo); // Obtém a quantidade solicitada pelo cliente para esse item
 
 	        if (emEstoque >= clienteQuer) { // Verifica se a quantidade em estoque é suficiente

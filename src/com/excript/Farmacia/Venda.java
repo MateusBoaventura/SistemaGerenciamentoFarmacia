@@ -3,6 +3,10 @@ package com.excript.Farmacia;
 //Importando Map e HashMap
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
+
+import excessoes.CadastroInvalido;
+import mercadoria.Produto;
 
 public class Venda {
 	private Map<Integer, Integer> carrinho;
@@ -69,10 +73,89 @@ public class Venda {
 		
 		Object[] s = this.carrinho.keySet().toArray();
 		
-		for(int i = 0;i<s.length;i++) {
+		for(int i = 0; i < s.length; i++) {
 			saida += String.format("\n%d : %d", (int)s[i],(int)this.carrinho.get(s[i]));
 		}
 		
 		return saida;
 	}
+	
+	public void decida(Cliente cliente, Estoque estoque) {
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Deseja mais alguma coisa?");
+		System.out.println("1 - Adicionar outro produto");
+		System.out.println("2 - Remover Produto");
+		System.out.println("3 - Exibir carrinho de compras");
+		System.out.println("4 - Finalizar compras");
+		
+		int escolha = scan.nextInt();
+		
+		switch (escolha) {
+		case 1:
+			this.vendaProduto(cliente, estoque);
+			break;
+		case 2:
+			this.removaProduto(cliente, estoque);
+			break;
+		case 3: 
+			System.out.println(this.toString());
+			this.decida(cliente, estoque);
+			break;
+		case 4:
+			break;
+		default:
+			System.out.println("Erro");
+			break;
+		}
+	}
+	
+	public void removaProduto(Cliente cliente, Estoque estoque){
+		Scanner scan = new Scanner(System.in);
+		this.toString();
+		System.out.println(this.toString());
+		System.out.println("Qual produto deseja remover?");
+		int i = scan.nextInt();
+		System.out.println("Qual a quantidade");
+		int qtd = scan.nextInt();
+		this.removerItem(i, qtd);
+		
+		this.decida(cliente, estoque);
+	}
+	
+	public void vendaProduto(Cliente cliente, Estoque estoque){
+		Scanner scan = new Scanner(System.in);
+		String nomeProduto;
+		int qtd = 0, cod;
+		System.out.println("O que deseja comprar?");
+		System.out.println(estoque.getMercadorias());
+		do {
+			nomeProduto = scan.nextLine();
+			cod = estoque.buscarProduto(nomeProduto);
+			if (cod == -1) {
+			System.out.println("Erro, digite novamente");
+			}
+		} while (cod == -1);
+		System.out.println("Digite a quantidade");
+		try {
+			do {
+				qtd = scan.nextInt();
+				try {
+					if (estoque.consultarQuantidade(cod) < qtd) {
+						System.out.println("Erro, quantidade indisponível");;
+					}
+				} catch (CadastroInvalido e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} while (estoque.consultarQuantidade(cod) < qtd);
+		} catch (CadastroInvalido e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		this.adicionarItem(cod, qtd);
+		
+		this.decida(cliente, estoque);
+	}
+	
 }
