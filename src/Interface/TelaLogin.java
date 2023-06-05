@@ -45,6 +45,7 @@ public class TelaLogin extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaLogin() {
+		setResizable(false);
 		
 		
 		
@@ -108,7 +109,7 @@ public class TelaLogin extends JFrame {
                     telaFuncionario.setVisible(true);
                     dispose();
                 } catch (LoginInvalido ex) {
-                    JOptionPane.showMessageDialog(contentPane, "Nome ou Senha incorretos", "Erro de Login", JOptionPane.ERROR_MESSAGE); // Exibe caixa de alerta com a mensagem "ERROU"
+                    JOptionPane.showMessageDialog(contentPane, "Nome ou Senha incorretos.", "Erro de Login", JOptionPane.ERROR_MESSAGE); // Exibe caixa de alerta com a mensagem "ERROU"
                 }
             }
         });
