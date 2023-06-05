@@ -80,7 +80,7 @@ public class Venda {
 		return saida;
 	}
 	
-	public void decida(Cliente cliente, Estoque estoque) {
+	public void decida(Cliente cliente, Estoque estoque) { //Função de loop da venda
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Deseja mais alguma coisa?");
 		System.out.println("1 - Adicionar outro produto");
