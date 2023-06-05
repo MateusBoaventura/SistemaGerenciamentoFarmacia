@@ -10,11 +10,13 @@ import mercadoria.Produto;
 public class Estoque {
 	private Map<Integer, Produto> mercadorias;
 	private Map<Integer, Integer> quantidade;
+	private Map<Integer, Float> preco;
 	private Map<String, Integer> nomes;
-	
+
 	public Estoque() {
 		this.mercadorias = new HashMap<>();
 		this.quantidade = new HashMap<>();
+		this.preco = new HashMap<>();
 		this.nomes = new HashMap<>();
 	}
 	
@@ -27,6 +29,7 @@ public class Estoque {
 		}
 		
 		this.nomes.put(produto.getNome(), codigo);
+		this.preco.put(codigo, 0f);
 		this.quantidade.put(codigo, 0);
 		this.mercadorias.put(codigo, produto);
 	}
@@ -39,6 +42,7 @@ public class Estoque {
 		
 		this.mercadorias.remove(codigo);
 		this.quantidade.remove(codigo);
+		this.preco.remove(codigo);
 		this.nomes.remove(p.getNome());
 	}
 	
@@ -61,7 +65,6 @@ public class Estoque {
 			throw new CadastroInvalido("Codigo",String.format("%d", codigo));
 		}
 		this.quantidade.put(codigo, quantidade);
-		
 	}
 	
 	public void atualizarQuantidade(String nome,int quantidade) throws CadastroInvalido {
@@ -69,6 +72,34 @@ public class Estoque {
 			throw new CadastroInvalido("Nome",nome);
 		}
 		this.atualizarQuantidade(this.nomes.get(nome), quantidade);
+	}
+	
+	public float consultarPreco(int codigo) throws CadastroInvalido {
+		if(this.preco.get(codigo) != null) {
+			return this.preco.get(codigo);
+		}
+		throw new CadastroInvalido("Codigo",String.format("%d", codigo));
+	}
+	
+	public float consultarPreco(String nome) throws CadastroInvalido {
+		if(this.nomes.get(nome) != null) {
+			return this.consultarPreco(this.nomes.get(nome));
+		}
+		throw new CadastroInvalido("Nome",nome);
+	}
+	
+	public void atualizarPreco(int codigo,float preco) throws CadastroInvalido {
+		if(this.preco.get(codigo) == null) {
+			throw new CadastroInvalido("Codigo",String.format("%d", codigo));
+		}
+		this.preco.put(codigo, preco);
+	}
+	
+	public void atualizarPreco(String nome,float preco) throws CadastroInvalido {
+		if(this.nomes.get(nome) == null) {
+			throw new CadastroInvalido("Nome",nome);
+		}
+		this.atualizarPreco(this.nomes.get(nome), preco);
 	}
 	
 	@Override
@@ -80,7 +111,7 @@ public class Estoque {
 				saida += "\n";
 			}
 			try {
-				saida += String.format("%s\t:\t%d", s[i],this.consultarQuantidade((String) s[i]));
+				saida += String.format("%s : %d : %.2f", s[i],this.consultarQuantidade((String) s[i]),this.consultarPreco((String)s[i]));
 			} catch (CadastroInvalido e) {
 				e.printStackTrace();
 			}

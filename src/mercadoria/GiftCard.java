@@ -4,12 +4,6 @@ public class GiftCard extends ProdutoPerecivel {
 	
 	private float valor;
 	private String jogo;
-	/*TODO
-	Adicionar valor de gift card
-	Refazer os construtores
-	Adicionar o toString baseado nos outros toString
-	refazer os getters e setters
-	*/
 	
 	public GiftCard() {
 		super();
