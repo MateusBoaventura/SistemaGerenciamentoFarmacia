@@ -2,7 +2,7 @@ package mercadoria;
 
 // Classe-Filha que indica produtos que possuem validade
 public abstract class ProdutoPerecivel extends Produto{
-	private String dataValidade; // //A data será passada em string, para que a funcao estaVencido() funcione corretamente
+	private String dataValidade; // //A data será passada em string
 
 	// Construtor vazio
 	public ProdutoPerecivel() {

@@ -32,8 +32,6 @@ public class Comida extends ProdutoPerecivel{
 	public void setDetalhes(String detalhes) {
 		this.detalhes = detalhes;
 	}
-
-	//Outros Metodos
 	
 	@Override
 	public String toString() {

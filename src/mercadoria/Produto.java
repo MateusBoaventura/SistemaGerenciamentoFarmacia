@@ -5,7 +5,7 @@ public abstract class Produto {
 	
 	// Atribuindo atributos
 	private String nome, fabricante;
-	private String dataFabricacao; // A data será passada em string, para que a funcao estaVencido() funcione corretamente
+	private String dataFabricacao; // A data será passada em string
 
 	// Construtor para caso não passe nada, saia vazio
 	public Produto() {

@@ -71,14 +71,13 @@ public class Cliente {
 	public int calculaPontos() {
 		double aux = getDinheiro();
 		// Verifica se o cliente tem pelo menos 100 reais para ganhar os 10 pontos
-		if (aux >= 100.0) {
+		while (aux >= 100.0) {
 				pontos += 10;
 				aux -= 100.0;
 		    }
-		// Verifica quantos pontos adicionais o cliente ganha a cada 10 reais
+		// Verifica o restante de aux e ganha 1 ponto a cada 10
 		int pontosExtras = (int) (aux / 10);
 			pontos += pontosExtras;
-			aux -= pontosExtras * 10;
 			return pontos;
 	}
 	
