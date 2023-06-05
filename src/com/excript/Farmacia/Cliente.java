@@ -2,7 +2,7 @@ package com.excript.Farmacia;
 
 	// Criando a classe Cliente com seus atributos, getters e setters e funcoes
 public class Cliente {
-    private String nome, telefone, email;
+    private String nome, telefone, email, cpf;
     private int pontos;
     private double dinheiro;
 
@@ -10,16 +10,18 @@ public class Cliente {
     public Cliente() {
     	this.nome = new String();
     	this.telefone = new String();
+    	this.cpf = new String();
     	this.email = new String();
     	this.pontos = 0;
     	this.dinheiro = 0.0;
     }
     
     // Construtor
-    public Cliente(String nome, String telefone, String email, int pontos, double dinheiro) {
+    public Cliente(String nome, String telefone, String email, String cpf, int pontos, double dinheiro) {
         this.nome = nome;
         this.telefone = telefone;
         this.email = email;
+        this.cpf = cpf;
         this.pontos = pontos;
         this.dinheiro = dinheiro;
     }
@@ -59,6 +61,13 @@ public class Cliente {
 		this.dinheiro = dinheiro;
 	}
 	
+	public String getCpf() {
+		return cpf;
+	}
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
 	public int calculaPontos() {
 		double aux = getDinheiro();
 		// Verifica se o cliente tem pelo menos 100 reais para ganhar os 10 pontos
@@ -74,6 +83,6 @@ public class Cliente {
 	}
 	
 	public String toString() {
-		return String.format("Cliente:%s\nEmail:%s\nTelefone:%s\n,Pontos:%d",this.getNome(),this.getEmail(),this.getTelefone(),this.getPontos());
+		return String.format("Cliente:%s\nEmail:%s\nCPF:%s\nTelefone:%s\n,Pontos:%d",this.getNome(),this.getEmail(),this.getCpf(),this.getTelefone(),this.getPontos());
 	}
 }
