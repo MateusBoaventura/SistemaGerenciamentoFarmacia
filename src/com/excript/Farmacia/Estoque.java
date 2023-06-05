@@ -102,6 +102,42 @@ public class Estoque {
 		this.atualizarPreco(this.nomes.get(nome), preco);
 	}
 	
+	
+	
+	public Map<Integer, Produto> getMercadorias() {
+		return mercadorias;
+	}
+
+	public void setMercadorias(Map<Integer, Produto> mercadorias) {
+		this.mercadorias = mercadorias;
+	}
+
+	public Map<Integer, Integer> getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(Map<Integer, Integer> quantidade) {
+		this.quantidade = quantidade;
+	}
+
+	public Map<Integer, Float> getPreco() {
+		return preco;
+	}
+
+	public void setPreco(Map<Integer, Float> preco) {
+		this.preco = preco;
+	}
+
+	public Map<String, Integer> getNomes() {
+		return nomes;
+	}
+
+	public void setNomes(Map<String, Integer> nomes) {
+		this.nomes = nomes;
+	}
+	
+	
+
 	@Override
 	public String toString() {
 		String saida = new String();

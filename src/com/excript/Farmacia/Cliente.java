@@ -4,7 +4,7 @@ package com.excript.Farmacia;
 public class Cliente {
     private String nome, telefone, email, cpf;
     private int pontos;
-    private double dinheiro;
+    private float dinheiro;
 
     // Construtor vazio
     public Cliente() {
@@ -13,11 +13,11 @@ public class Cliente {
     	this.cpf = new String();
     	this.email = new String();
     	this.pontos = 0;
-    	this.dinheiro = 0.0;
+    	this.dinheiro = 0.0f;
     }
     
     // Construtor
-    public Cliente(String nome, String telefone, String email, String cpf, int pontos, double dinheiro) {
+    public Cliente(String nome, String telefone, String email, String cpf, int pontos, float dinheiro) {
         this.nome = nome;
         this.telefone = telefone;
         this.email = email;
@@ -54,10 +54,10 @@ public class Cliente {
 		this.pontos = pontos;
 	}
 
-	public double getDinheiro() {
+	public float getDinheiro() {
 		return dinheiro;
 	}
-	public void setDinheiro(double dinheiro) {
+	public void setDinheiro(float dinheiro) {
 		this.dinheiro = dinheiro;
 	}
 	

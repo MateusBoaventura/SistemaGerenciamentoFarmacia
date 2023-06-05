@@ -7,11 +7,6 @@ import excessoes.JaCadastrado;
 import mercadoria.Comida;
 
 //TEMPORARIO AAAAAAAAAAAAAAAAAAAAAAAA
-<<<<<<< HEAD
-
-//Paul lindao2
-=======
->>>>>>> 1cba03209c96e2055d156244c75a8bd368ccdc91
 public class Main {
 	public static void main(String [] args) throws JaCadastrado, CadastroInvalido {
 		Comida c = new Comida("Leite ninho","Nestle","32/13/-2000","Ontem",8001,"Calorias sao mais de 8000!");
@@ -23,6 +18,5 @@ public class Main {
 		e.atualizarQuantidade(0, 10);
 		e.atualizarPreco(32, 20.3f);
 		System.out.println(e);
-		System.out.print(e);
 	}
 }
