@@ -20,6 +20,8 @@ import java.awt.event.ActionEvent;
 import excessoes.CadastroInvalido;
 import excessoes.JaCadastrado;
 
+import main.Main;
+
 public class TelaAdicionarCosmetico extends JFrame {
 
 	/**
@@ -41,7 +43,12 @@ public class TelaAdicionarCosmetico extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaAdicionarCosmetico(Estoque estoque, String funcionarioLogado) {
+	
+	/*
+	VIDE LINHA 135
+	*/
+	
+	public TelaAdicionarCosmetico(Estoque estoque/*<-- MATE!*/, String funcionarioLogado) {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 523, 497);
@@ -125,7 +132,7 @@ public class TelaAdicionarCosmetico extends JFrame {
 		JButton btnVoltar = new JButton("Voltar");
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaAdicionarProduto telaProduto = new TelaAdicionarProduto(estoque, funcionarioLogado);
+				TelaAdicionarProduto telaProduto = new TelaAdicionarProduto(Main.ESTOQUE/*<-- REPTIA ISSO PRA TUDO QUE MENCIONE ESTOQUE*/, funcionarioLogado);
                 telaProduto.setVisible(true);
                 dispose();
 			}
