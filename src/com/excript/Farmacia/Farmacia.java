@@ -39,9 +39,24 @@ public class Farmacia {
 	            preco = this.estoque.consultarPreco(codigo); // Consulta o preço do item
 	            this.estoque.atualizarQuantidade(codigo, emEstoque - clienteQuer); // Atualiza a quantidade em estoque
 	            venda.getCliente().setDinheiro(venda.getCliente().getDinheiro() + preco * clienteQuer); // Atualiza o saldo do cliente com o valor da compra
+	            System.out.println(venda.getCliente().getDinheiro());
 	        }
 	    }
+
+	    // Adicionar pontos ao cliente com base no valor da compra
+	    int pontosGanhos = (int) (venda.getCliente().getDinheiro() / 10);
+	    venda.getCliente().adicionarPontos(pontosGanhos);
+	    System.out.println(pontosGanhos);
+
+	    // Verificar se o cliente possui 100 pontos e aplicar desconto de 10%
+	    if (venda.getCliente().getPontos() >= 100) {
+	        float desconto = venda.getCliente().getDinheiro() * 0.1f; // Calcular o valor do desconto (10% do valor da compra)
+	        venda.getCliente().setDinheiro(venda.getCliente().getDinheiro() - desconto); // Subtrair o desconto do saldo do cliente
+	        venda.getCliente().removerPontos(100); // Remover os 100 pontos acumulados
+	        System.out.println("Parabéns! Você ganhou um desconto de 10% na sua compra!");
+	    }
 	}
+
 
 	
 	// Consulta o preço, quantidade e nome. Retorna em uma string

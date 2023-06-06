@@ -84,4 +84,13 @@ public class Cliente {
 	public String toString() {
 		return String.format("Cliente:%s\nEmail:%s\nCPF:%s\nTelefone:%s\n,Pontos:%d",this.getNome(),this.getEmail(),this.getCpf(),this.getTelefone(),this.getPontos());
 	}
+
+	public void adicionarPontos(int pontosGanhos) {
+	    pontos += pontosGanhos;
+	}
+
+	public void removerPontos(int pontosRemovidos) {
+	    pontos -= pontosRemovidos;
+	}
+
 }

@@ -11,6 +11,8 @@ import java.awt.Color;
 import javax.swing.JList;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class TelaFuncionario extends JFrame {
 
@@ -58,6 +60,10 @@ public class TelaFuncionario extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		JButton btnNewButton = new JButton("Estoque");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnNewButton.setBounds(133, 119, 122, 63);
 		contentPane.add(btnNewButton);
