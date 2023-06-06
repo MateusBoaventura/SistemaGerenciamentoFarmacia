@@ -7,10 +7,16 @@ import GUI.*;
 import java.awt.*;
 
 public class Main {
+	public static Estoque ESTOQUE = new Estoque();
+	/*
+	Onde tinha "estoque", vc vai botar Main.ESTOQUE
+	
+	Vide TelaAdicionarCosmetico
+	*/
 	public static void main(String [] args) throws JaCadastrado, CadastroInvalido {
 
 		Farmacia farmacia = new Farmacia();
-		Estoque estoque = new Estoque();
+		//Estoque estoque = new Estoque();
 		Funcionario Mateus = new Funcionario("Mateus", "123");
 		Funcionario Victor = new Funcionario("Victor", "1234");		
 		Medicamento alivium = new Medicamento("Alivium", "EmpresaDeMed", "10/03/2020", "11/04/2025", 150, false, false);
