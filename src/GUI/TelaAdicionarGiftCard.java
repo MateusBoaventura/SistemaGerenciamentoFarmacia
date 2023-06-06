@@ -1,208 +1,185 @@
 package GUI;
 
+
+import javax.swing.JFrame;
 import javax.swing.JPanel;
-import java.awt.FlowLayout;
-import javax.swing.JTextField;
-import java.awt.Font;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.SystemColor;
-import javax.swing.JCheckBox;
+import javax.swing.border.EmptyBorder;
+import com.excript.Farmacia.*;
+
+import mercadoria.Comida;
+import mercadoria.Produto;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+
+import java.awt.Font;
+import javax.swing.JTextField;
 import javax.swing.JButton;
-import javax.swing.border.CompoundBorder;
-import javax.swing.JTextPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import com.excript.Farmacia.*;
 
 import excessoes.CadastroInvalido;
 import excessoes.JaCadastrado;
-import mercadoria.*;
 
-public class TelaAdicionarGiftCard extends JPanel {
-	private JTextField txtNome;
-	private JTextField txtFabricante;
-	private JTextField txtDataDeFabricao;
-	private JTextField txtDataDeValidade;
-	private JTextField txtValor;
-	private JTextField txtCodgo;
-	private JTextField txtJogo;
-	private JTextPane txtpnNome;
-	private JTextPane txtpnFabricante;
-	private JTextPane txtpnDataDeFabricao;
-	private JTextPane txtpnDataDeValidade;
-	private JTextPane txtpnValor;
-	private JTextPane txtpnJogo;
-	private JTextPane txtpnCdigo;
-	protected Component contentPane;
+public class TelaAdicionarGiftCard extends JFrame {
 
 	/**
-	 * Create the panel.
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JLabel lblNewLabel_2;
+	private JTextField textField_4;
+	private JLabel lblNewLabel_4;
+	private JLabel lblNewLabel_5;
+	private JTextField textField_6;
+	private JLabel lblNewLabel_6;
+	private JTextField textField_3;
+	private JTextField textField_5;
+	private JLabel lblNewLabel_3;
+	private JLabel lblNewLabel_7;
+	private JTextField textField_7;
+
+	/**
+	 * Create the frame.
 	 */
 	public TelaAdicionarGiftCard(Estoque estoque, String funcionarioLogado) {
-		setLayout(null);
 		
-		txtNome = new JTextField();
-		txtNome.setBackground(new Color(240, 240, 240));
-		txtNome.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		txtNome.setBounds(118, 11, 322, 20);
-		add(txtNome);
-		txtNome.setColumns(10);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 504, 517);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
 		
-		txtFabricante = new JTextField();
-		txtFabricante.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		txtFabricante.setColumns(10);
-		txtFabricante.setBackground(SystemColor.menu);
-		txtFabricante.setBounds(118, 41, 322, 20);
-		add(txtFabricante);
+		JLabel lblNewLabel = new JLabel("Nome:");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel.setBounds(37, 27, 74, 40);
+		contentPane.add(lblNewLabel);
 		
-		txtDataDeFabricao = new JTextField();
-		txtDataDeFabricao.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		txtDataDeFabricao.setColumns(10);
-		txtDataDeFabricao.setBackground(SystemColor.menu);
-		txtDataDeFabricao.setBounds(118, 72, 322, 20);
-		add(txtDataDeFabricao);
+		textField = new JTextField();
+		textField.setBounds(100, 34, 329, 30);
+		contentPane.add(textField);
+		textField.setColumns(10);
 		
-		txtDataDeValidade = new JTextField();
-		txtDataDeValidade.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		txtDataDeValidade.setColumns(10);
-		txtDataDeValidade.setBackground(SystemColor.menu);
-		txtDataDeValidade.setBounds(118, 103, 322, 20);
-		add(txtDataDeValidade);
+		JLabel lblNewLabel_1 = new JLabel("Fabricante:");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_1.setBounds(20, 71, 88, 40);
+		contentPane.add(lblNewLabel_1);
 		
-		txtValor = new JTextField();
-		txtValor.setToolTipText("");
-		txtValor.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		txtValor.setColumns(10);
-		txtValor.setBackground(SystemColor.menu);
-		txtValor.setBounds(118, 134, 322, 20);
-		add(txtValor);
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(100, 78, 329, 30);
+		contentPane.add(textField_1);
 		
-		txtCodgo = new JTextField();
-		txtCodgo.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		txtCodgo.setColumns(10);
-		txtCodgo.setBackground(SystemColor.menu);
-		txtCodgo.setBounds(118, 196, 322, 20);
-		add(txtCodgo);
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
+		textField_2.setBounds(100, 122, 329, 30);
+		contentPane.add(textField_2);
+		
+		lblNewLabel_2 = new JLabel("Fabricação:");
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_2.setBounds(20, 115, 88, 40);
+		contentPane.add(lblNewLabel_2);
 		
 		JButton btnNewButton = new JButton("Adicionar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String nome = txtNome.getText();
-				String fabricante = txtFabricante.getText();
-				String dataFrabricacao = txtDataDeFabricao.getText();
-				String dataValidade = txtDataDeValidade.getText();
-				Float valor = Float.parseFloat(txtValor.getText());
-				String jogo = txtJogo.getText();
-				int cod = Integer.parseInt(txtCodgo.getText());
+				String nome = textField.getText();
+				String fabricante = textField_1.getText();
+				String dataFrabricacao = textField_2.getText();
+				String dataValidade = textField_6.getText();
+				String descricao = textField_3.getText();
+				int cod = Integer.parseInt(textField_4.getText());
+				float preco = Float.parseFloat(textField_5.getText());
+				float calorias = Float.parseFloat(textField_7.getText());
 				
-				
-				
-				
-				Produto GiftCard = new GiftCard(nome, fabricante, dataFrabricacao, dataValidade, valor, jogo);
+				Produto comida = new Comida(nome, fabricante, dataFrabricacao, dataValidade, calorias, descricao);				
 				
 				try {
-					estoque.cadastrarProduto(GiftCard, cod);
+					estoque.cadastrarProduto(comida, cod);
+					JOptionPane.showMessageDialog(contentPane, "Produto cadastrado!");
 				} catch (JaCadastrado ex) {
 					JOptionPane.showMessageDialog(contentPane,"Erro ao cadastrar o produto, código já cadastrado");
 				}
 				
 				try {
-					estoque.atualizarPreco(cod, valor);
+					estoque.atualizarPreco(cod, preco);
 				} catch (CadastroInvalido ex) {
 					JOptionPane.showMessageDialog(contentPane,"Erro ao registrar o preço, código inválido");
 				}
 			}
 		});
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnNewButton.setBounds(304, 272, 136, 23);
-		add(btnNewButton);
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnNewButton.setBounds(322, 412, 137, 48);
+		contentPane.add(btnNewButton);
 		
 		JButton btnVoltar = new JButton("Voltar");
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-					TelaAdicionarProduto telaProduto = new TelaAdicionarProduto(estoque, funcionarioLogado);
-	                telaProduto.setVisible(true);
-	                dispose();
-				}
+				TelaAdicionarProduto telaProduto = new TelaAdicionarProduto(estoque, funcionarioLogado);
+                telaProduto.setVisible(true);
+                dispose();
+			}
 		});
-		btnVoltar.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnVoltar.setBounds(10, 274, 113, 23);
-		add(btnVoltar);
+		btnVoltar.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnVoltar.setBounds(20, 412, 137, 48);
+		contentPane.add(btnVoltar);
 		
-		txtJogo = new JTextField();
-		txtJogo.setToolTipText("");
-		txtJogo.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		txtJogo.setColumns(10);
-		txtJogo.setBackground(SystemColor.menu);
-		txtJogo.setBounds(118, 165, 322, 20);
-		add(txtJogo);
+		textField_4 = new JTextField();
+		textField_4.setColumns(10);
+		textField_4.setBounds(100, 213, 329, 30);
+		contentPane.add(textField_4);
 		
-		txtpnNome = new JTextPane();
-		txtpnNome.setBorder(null);
-		txtpnNome.setBackground(new Color(240, 240, 240));
-		txtpnNome.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		txtpnNome.setText("Nome:");
-		txtpnNome.setBounds(10, 11, 43, 20);
-		add(txtpnNome);
+		lblNewLabel_4 = new JLabel("Código:");
+		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_4.setBounds(20, 206, 88, 40);
+		contentPane.add(lblNewLabel_4);
 		
-		txtpnFabricante = new JTextPane();
-		txtpnFabricante.setText("Fabricante:");
-		txtpnFabricante.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		txtpnFabricante.setBorder(null);
-		txtpnFabricante.setBackground(SystemColor.menu);
-		txtpnFabricante.setBounds(10, 41, 64, 20);
-		add(txtpnFabricante);
+		lblNewLabel_5 = new JLabel("Preço:");
+		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_5.setBounds(23, 353, 88, 40);
+		contentPane.add(lblNewLabel_5);
 		
-		txtpnDataDeFabricao = new JTextPane();
-		txtpnDataDeFabricao.setText("Data de fabricação:");
-		txtpnDataDeFabricao.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		txtpnDataDeFabricao.setBorder(null);
-		txtpnDataDeFabricao.setBackground(SystemColor.menu);
-		txtpnDataDeFabricao.setBounds(10, 72, 113, 20);
-		add(txtpnDataDeFabricao);
+		textField_6 = new JTextField();
+		textField_6.setColumns(10);
+		textField_6.setBounds(100, 163, 329, 30);
+		contentPane.add(textField_6);
 		
-		txtpnDataDeValidade = new JTextPane();
-		txtpnDataDeValidade.setText("Data de validade:");
-		txtpnDataDeValidade.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		txtpnDataDeValidade.setBorder(null);
-		txtpnDataDeValidade.setBackground(SystemColor.menu);
-		txtpnDataDeValidade.setBounds(10, 103, 113, 20);
-		add(txtpnDataDeValidade);
+		lblNewLabel_6 = new JLabel("Validade:");
+		lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_6.setBounds(23, 156, 88, 40);
+		contentPane.add(lblNewLabel_6);
 		
-		txtpnValor = new JTextPane();
-		txtpnValor.setText("Valor:");
-		txtpnValor.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		txtpnValor.setBorder(null);
-		txtpnValor.setBackground(SystemColor.menu);
-		txtpnValor.setBounds(10, 134, 113, 20);
-		add(txtpnValor);
+		textField_3 = new JTextField();
+		textField_3.setColumns(10);
+		textField_3.setBounds(100, 360, 329, 30);
+		contentPane.add(textField_3);
 		
-		txtpnJogo = new JTextPane();
-		txtpnJogo.setText("Jogo:");
-		txtpnJogo.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		txtpnJogo.setBorder(null);
-		txtpnJogo.setBackground(SystemColor.menu);
-		txtpnJogo.setBounds(10, 165, 113, 20);
-		add(txtpnJogo);
+		textField_5 = new JTextField();
+		textField_5.setColumns(10);
+		textField_5.setBounds(100, 263, 329, 30);
+		contentPane.add(textField_5);
 		
-		txtpnCdigo = new JTextPane();
-		txtpnCdigo.setText("Código:");
-		txtpnCdigo.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		txtpnCdigo.setBorder(null);
-		txtpnCdigo.setBackground(SystemColor.menu);
-		txtpnCdigo.setBounds(10, 196, 113, 20);
-		add(txtpnCdigo);
-
-	}
-	protected void dispose() {
-		// TODO Auto-generated method stub
+		lblNewLabel_3 = new JLabel("Valor:");
+		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_3.setBounds(20, 256, 88, 40);
+		contentPane.add(lblNewLabel_3);
 		
-	}
-	private static class __Tmp {
-		private static void __tmp() {
-			  javax.swing.JPanel __wbp_panel = new javax.swing.JPanel();
-		}
+		lblNewLabel_7 = new JLabel("Jogo:");
+		lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_7.setBounds(20, 304, 88, 40);
+		contentPane.add(lblNewLabel_7);
+		
+		textField_7 = new JTextField();
+		textField_7.setColumns(10);
+		textField_7.setBounds(100, 316, 329, 30);
+		contentPane.add(textField_7);
+		
+		
+		
 	}
 }

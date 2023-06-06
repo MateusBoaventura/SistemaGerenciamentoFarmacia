@@ -101,11 +101,11 @@ public class TelaAdicionarVariado extends JFrame {
 				float preco = Float.parseFloat(textField_5.getText());
 				
 				Produto variado = new Variado(nome, fabricante, dataFrabricacao, descricao);
-
+				
 				
 				try {
 					estoque.cadastrarProduto(variado, cod);
-					System.out.println("Cadastrou");
+					JOptionPane.showMessageDialog(contentPane, "Produto cadastrado!");
 				} catch (JaCadastrado ex) {
 					JOptionPane.showMessageDialog(contentPane,"Erro ao cadastrar o produto, código já cadastrado");
 				}

@@ -14,11 +14,13 @@ public class TelaEstoque extends JFrame {
 
 	private JPanel contentPane;
 	private static final long serialVersionUID = 1L;
+	JPanel cards;
 	
 	/**
 	 * Create the frame.
 	 */
 	public TelaEstoque(Estoque estoque, String funcionarioLogado) {
+		setTitle("Opções Estoque");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 543, 397);

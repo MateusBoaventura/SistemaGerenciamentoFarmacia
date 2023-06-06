@@ -1,12 +1,9 @@
 package GUI;
 
-import java.awt.*;
 import javax.swing.JPanel;
-import java.awt.EventQueue;
 
 import com.excript.Farmacia.*;
 import excessoes.*;
-import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import java.awt.Font;
 import java.awt.Color;
@@ -21,6 +18,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class TelaAtualizarProduto extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField txtID;
 	private JTextField txtQuantidade;
 	protected Component contentPane;
