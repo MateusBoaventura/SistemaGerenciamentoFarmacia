@@ -1,4 +1,4 @@
-package Interface;
+package GUI;
 
 import java.awt.EventQueue;
 
@@ -46,7 +46,6 @@ public class TelaLogin extends JFrame {
 	 */
 	public TelaLogin() {
 		setResizable(false);
-		
 		
 		
 		setTitle("Login");

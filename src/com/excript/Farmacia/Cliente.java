@@ -15,7 +15,7 @@ public class Cliente {
     }
     
     // Construtor
-    public Cliente(String nome, String telefone, String email, String cpf, int pontos, float dinheiro) {
+    public Cliente(String nome, String telefone, String email, String cpf, int pontos) {
         this.nome = nome;
         this.telefone = telefone;
         this.email = email;
@@ -59,7 +59,7 @@ public class Cliente {
 	}
 
 	public String toString() {
-		return String.format("Cliente:%s\nEmail:%s\nCPF:%s\nTelefone:%s\n,Pontos:%d",this.getNome(),this.getEmail(),this.getCpf(),this.getTelefone(),this.getPontos());
+		return String.format("Cliente:%s\nEmail:%s\nCPF:%s\nTelefone:%s\nPontos:%d",this.getNome(),this.getEmail(),this.getCpf(),this.getTelefone(),this.getPontos());
 	}
 
 }

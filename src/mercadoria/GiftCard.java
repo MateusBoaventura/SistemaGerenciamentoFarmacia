@@ -2,7 +2,7 @@ package mercadoria;
 
 public class GiftCard extends ProdutoPerecivel {
 	
-	private float valor;
+	private float valor; // O valor se refere ao valor no jogo, e não o preço do produto
 	private String jogo;
 	
 	public GiftCard() {

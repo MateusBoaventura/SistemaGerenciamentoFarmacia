@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.Scanner;
 
 import excessoes.CadastroInvalido;
-import mercadoria.Produto;
 
 public class Venda {
 	private Map<Integer, Integer> carrinho;
