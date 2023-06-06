@@ -4,7 +4,6 @@ package com.excript.Farmacia;
 public class Cliente {
     private String nome, telefone, email, cpf;
     private int pontos;
-    private float dinheiro;
 
     // Construtor vazio
     public Cliente() {
@@ -13,7 +12,6 @@ public class Cliente {
     	this.cpf = new String();
     	this.email = new String();
     	this.pontos = 0;
-    	this.dinheiro = 0.0f;
     }
     
     // Construtor
@@ -23,7 +21,6 @@ public class Cliente {
         this.email = email;
         this.cpf = cpf;
         this.pontos = pontos;
-        this.dinheiro = dinheiro;
     }
 
     public String getNome() {
@@ -54,13 +51,6 @@ public class Cliente {
 		this.pontos = pontos;
 	}
 
-	public float getDinheiro() {
-		return dinheiro;
-	}
-	public void setDinheiro(float dinheiro) {
-		this.dinheiro = dinheiro;
-	}
-	
 	public String getCpf() {
 		return cpf;
 	}
@@ -68,29 +58,8 @@ public class Cliente {
 		this.cpf = cpf;
 	}
 
-	public int calculaPontos() {
-		double aux = getDinheiro();
-		// Verifica se o cliente tem pelo menos 100 reais para ganhar os 10 pontos
-		while (aux >= 100.0) {
-				pontos += 10;
-				aux -= 100.0;
-		    }
-		// Verifica o restante de aux e ganha 1 ponto a cada 10
-		int pontosExtras = (int) (aux / 10);
-			pontos += pontosExtras;
-			return pontos;
-	}
-	
 	public String toString() {
 		return String.format("Cliente:%s\nEmail:%s\nCPF:%s\nTelefone:%s\n,Pontos:%d",this.getNome(),this.getEmail(),this.getCpf(),this.getTelefone(),this.getPontos());
-	}
-
-	public void adicionarPontos(int pontosGanhos) {
-	    pontos += pontosGanhos;
-	}
-
-	public void removerPontos(int pontosRemovidos) {
-	    pontos -= pontosRemovidos;
 	}
 
 }

@@ -27,9 +27,11 @@ public class Farmacia {
 
 	
 	// Recebe a venda e percorre os itens do carrinho e verifica se a quantidade é o suficiente
-	public void finalizarVenda(Venda venda) throws CadastroInvalido {
+	public void finalizarVenda(Venda venda,boolean usarPontos) throws CadastroInvalido {
 	    Object[] itens = venda.getCarrinho().keySet().toArray(); // Obtém a lista de itens do carrinho da venda
-	    float preco = 0; // Variável auxiliar para armazenar o preço de cada item
+	    float preco = 0f; // Variável auxiliar para armazenar o preço de cada item
+	    
+	    float valorFinal = 0f;
 
 	    for (int i = 0, codigo = 0, emEstoque = 0, clienteQuer = 0; i < itens.length; i++) {
 	        codigo = (int) itens[i]; // Obtém o código do item
@@ -37,24 +39,20 @@ public class Farmacia {
 
 	        if (emEstoque >= clienteQuer) { // Verifica se a quantidade em estoque é suficiente
 	            preco = this.estoque.consultarPreco(codigo); // Consulta o preço do item
-	            this.estoque.atualizarQuantidade(codigo, emEstoque - clienteQuer); // Atualiza a quantidade em estoque
-	            venda.getCliente().setDinheiro(venda.getCliente().getDinheiro() + preco * clienteQuer); // Atualiza o saldo do cliente com o valor da compra
-	            System.out.println(venda.getCliente().getDinheiro());
+	            this.estoque.atualizarQuantidade(codigo, emEstoque - clienteQuer); // Atualiza a quantidade em estoque=
+	            valorFinal += preco * clienteQuer;
 	        }
 	    }
-
-	    // Adicionar pontos ao cliente com base no valor da compra
-	    int pontosGanhos = (int) (venda.getCliente().getDinheiro() / 10);
-	    venda.getCliente().adicionarPontos(pontosGanhos);
-	    System.out.println(pontosGanhos);
-
-	    // Verificar se o cliente possui 100 pontos e aplicar desconto de 10%
-	    if (venda.getCliente().getPontos() >= 100) {
-	        float desconto = venda.getCliente().getDinheiro() * 0.1f; // Calcular o valor do desconto (10% do valor da compra)
-	        venda.getCliente().setDinheiro(venda.getCliente().getDinheiro() - desconto); // Subtrair o desconto do saldo do cliente
-	        venda.getCliente().removerPontos(100); // Remover os 100 pontos acumulados
-	        System.out.println("Parabéns! Você ganhou um desconto de 10% na sua compra!");
+	    
+	    if(venda.getCliente().getPontos() >= 100 && usarPontos) {
+	    	valorFinal -= valorFinal/10;
+	    	venda.getCliente().setPontos(venda.getCliente().getPontos()-100);
 	    }
+	    
+	    float pontos = (valorFinal/10);
+	    pontos -= pontos%1;
+	    
+	    venda.getCliente().setPontos((int) (venda.getCliente().getPontos() + pontos));
 	}
 
 
@@ -71,7 +69,7 @@ public class Farmacia {
 	        preco = this.estoque.consultarPreco(codigo); // Consulta o preço do item
 
 	        // Formata a string com as informações do item e adiciona à saída
-	        saida += String.format("%s : %d = %.2f (%.2f Cada)", this.estoque.getMercadorias().get(codigo).getNome(), clienteQuer, clienteQuer * preco, preco);
+	        saida += String.format("%s : %d = [Sem Pontos = %.2f (%.2f Cada)][Com Pontos = %.2f (%.2f Cada)]", this.estoque.getMercadorias().get(codigo).getNome(), clienteQuer, clienteQuer * preco, preco,clienteQuer * preco / 10,preco/10);
 	    }
 
 	    return saida; // Retorna a saída contendo as informações do total da venda

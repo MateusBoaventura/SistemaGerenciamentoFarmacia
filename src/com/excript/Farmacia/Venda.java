@@ -47,7 +47,6 @@ public class Venda {
 	    this.carrinho.put(codigo, qnt + quantidade); // Adiciona a quantidade informada ao carrinho para o produto com o código fornecido
 	}
 
-	
 	// Removendo item passando o codigo e a quantidade
 	public void removerItem(int codigo,int quantidade) {
 		Integer qnt = this.carrinho.get(codigo); // Obtém a quantidade atual do produto no carrinho pelo seu código
@@ -64,7 +63,6 @@ public class Venda {
 	    this.carrinho.put(codigo, qnt - quantidade); // Subtrai a quantidade informada do produto no carrinho
 	}
 
-	
 	@Override
 	public String toString() {
 		String saida = new String();
