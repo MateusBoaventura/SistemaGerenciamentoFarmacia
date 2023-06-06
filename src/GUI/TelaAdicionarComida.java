@@ -4,7 +4,6 @@ package GUI;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import com.excript.Farmacia.*;
 
 import mercadoria.Comida;
 import mercadoria.Produto;
@@ -19,6 +18,7 @@ import java.awt.event.ActionEvent;
 
 import excessoes.CadastroInvalido;
 import excessoes.JaCadastrado;
+import main.Main;
 
 public class TelaAdicionarComida extends JFrame {
 
@@ -45,7 +45,7 @@ public class TelaAdicionarComida extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaAdicionarComida(Estoque estoque, String funcionarioLogado) {
+	public TelaAdicionarComida(String funcionarioLogado) {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 504, 569);
@@ -110,14 +110,14 @@ public class TelaAdicionarComida extends JFrame {
 				Produto comida = new Comida(nome, fabricante, dataFrabricacao, dataValidade, calorias, descricao);				
 				
 				try {
-					estoque.cadastrarProduto(comida, cod);
+					Main.ESTOQUE.cadastrarProduto(comida, cod);
 					JOptionPane.showMessageDialog(contentPane, "Produto cadastrado!");
 				} catch (JaCadastrado ex) {
 					JOptionPane.showMessageDialog(contentPane,"Erro ao cadastrar o produto, código já cadastrado");
 				}
 				
 				try {
-					estoque.atualizarPreco(cod, preco);
+					Main.ESTOQUE.atualizarPreco(cod, preco);
 				} catch (CadastroInvalido ex) {
 					JOptionPane.showMessageDialog(contentPane,"Erro ao registrar o preço, código inválido");
 				}
@@ -130,7 +130,7 @@ public class TelaAdicionarComida extends JFrame {
 		JButton btnVoltar = new JButton("Voltar");
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaAdicionarProduto telaProduto = new TelaAdicionarProduto(estoque, funcionarioLogado);
+				TelaAdicionarProduto telaProduto = new TelaAdicionarProduto(Main.ESTOQUE, funcionarioLogado);
                 telaProduto.setVisible(true);
                 dispose();
 			}

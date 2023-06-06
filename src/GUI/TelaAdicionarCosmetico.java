@@ -4,7 +4,6 @@ package GUI;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import com.excript.Farmacia.*;
 
 import mercadoria.Cosmetico;
 import mercadoria.Produto;
@@ -48,7 +47,7 @@ public class TelaAdicionarCosmetico extends JFrame {
 	VIDE LINHA 135
 	*/
 	
-	public TelaAdicionarCosmetico(Estoque estoque/*<-- MATE!*/, String funcionarioLogado) {
+	public TelaAdicionarCosmetico(String funcionarioLogado) {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 523, 497);
@@ -112,14 +111,14 @@ public class TelaAdicionarCosmetico extends JFrame {
 				
 				
 				try {
-					estoque.cadastrarProduto(cosmetico, cod);
+					Main.ESTOQUE.cadastrarProduto(cosmetico, cod);
 					JOptionPane.showMessageDialog(contentPane, "Produto cadastrado!");
 				} catch (JaCadastrado ex) {
 					JOptionPane.showMessageDialog(contentPane,"Erro ao cadastrar o produto, código já cadastrado");
 				}
 				
 				try {
-					estoque.atualizarPreco(cod, preco);
+					Main.ESTOQUE.atualizarPreco(cod, preco);
 				} catch (CadastroInvalido ex) {
 					JOptionPane.showMessageDialog(contentPane,"Erro ao registrar o preço, código inválido");
 				}
@@ -132,7 +131,7 @@ public class TelaAdicionarCosmetico extends JFrame {
 		JButton btnVoltar = new JButton("Voltar");
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaAdicionarProduto telaProduto = new TelaAdicionarProduto(Main.ESTOQUE/*<-- REPTIA ISSO PRA TUDO QUE MENCIONE ESTOQUE*/, funcionarioLogado);
+				TelaAdicionarProduto telaProduto = new TelaAdicionarProduto(Main.ESTOQUE, funcionarioLogado);
                 telaProduto.setVisible(true);
                 dispose();
 			}

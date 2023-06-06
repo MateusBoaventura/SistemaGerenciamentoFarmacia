@@ -2,8 +2,11 @@ package GUI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.CardLayout;
 import java.awt.Font;
 import com.excript.Farmacia.*;
+
+import main.Main;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,12 +17,16 @@ public class TelaEstoque extends JFrame {
 
 	private JPanel contentPane;
 	private static final long serialVersionUID = 1L;
-	JPanel cards;
+	private CardLayout cardLayout;
 	
 	/**
 	 * Create the frame.
 	 */
 	public TelaEstoque(Estoque estoque, String funcionarioLogado) {
+		
+		cardLayout = new CardLayout();
+		System.out.println(estoque);
+		
 		setTitle("Opções Estoque");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -45,7 +52,7 @@ public class TelaEstoque extends JFrame {
 		JButton btnNewButton_1 = new JButton("Adicionar Produto");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaAdicionarProduto telaAddProduto = new TelaAdicionarProduto(estoque, funcionarioLogado);
+				TelaAdicionarProduto telaAddProduto = new TelaAdicionarProduto(Main.ESTOQUE, funcionarioLogado);
 				telaAddProduto.setVisible(true);
 				dispose();
 			}

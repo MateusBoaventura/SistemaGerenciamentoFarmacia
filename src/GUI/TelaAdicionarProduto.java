@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import com.excript.Farmacia.*;
 
+import main.Main;
+
 import javax.swing.JFrame;
 import javax.swing.border.EmptyBorder;
 
@@ -36,7 +38,7 @@ public class TelaAdicionarProduto extends JFrame {
 		btnNewButton = new JButton("Adicionar Medicamento");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaAdicionarMedicamento telaMedicamento = new TelaAdicionarMedicamento (estoque, funcionarioLogado);
+				TelaAdicionarMedicamento telaMedicamento = new TelaAdicionarMedicamento (funcionarioLogado);
 				telaMedicamento.setVisible(true);
 			}
 		});
@@ -49,7 +51,7 @@ public class TelaAdicionarProduto extends JFrame {
 		btnAdicionar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("AA");
-				TelaAdicionarCosmetico telaCosmetico = new TelaAdicionarCosmetico(estoque, funcionarioLogado);
+				TelaAdicionarCosmetico telaCosmetico = new TelaAdicionarCosmetico(funcionarioLogado);
 				telaCosmetico.setVisible(true);
 			}
 		});
@@ -60,7 +62,7 @@ public class TelaAdicionarProduto extends JFrame {
 		JButton btnNewButton_1_1 = new JButton("Adicionar GiftCard");
 		btnNewButton_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaAdicionarGiftCard telaGiftCard = new TelaAdicionarGiftCard(estoque, funcionarioLogado);
+				TelaAdicionarGiftCard telaGiftCard = new TelaAdicionarGiftCard(funcionarioLogado);
 				telaGiftCard.setVisible(true);
 			}
 		});
@@ -71,7 +73,7 @@ public class TelaAdicionarProduto extends JFrame {
 		JButton btnNewButton_1_1_1 = new JButton("Adicionar Comida");
 		btnNewButton_1_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaAdicionarComida telaComida = new TelaAdicionarComida(estoque, funcionarioLogado);
+				TelaAdicionarComida telaComida = new TelaAdicionarComida(funcionarioLogado);
 				telaComida.setVisible(true);
 				dispose();
 			}
@@ -83,7 +85,7 @@ public class TelaAdicionarProduto extends JFrame {
 		JButton btnNewButton_1_1_1_1 = new JButton("Adicionar Variado");
 		btnNewButton_1_1_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaAdicionarVariado telaVariado = new TelaAdicionarVariado(estoque, funcionarioLogado);
+				TelaAdicionarVariado telaVariado = new TelaAdicionarVariado(funcionarioLogado);
 				telaVariado.setVisible(true);
 				dispose();
 			}
@@ -96,7 +98,7 @@ public class TelaAdicionarProduto extends JFrame {
 		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaEstoque telaEstoque = new TelaEstoque(estoque, funcionarioLogado);
+				TelaEstoque telaEstoque = new TelaEstoque(Main.ESTOQUE, funcionarioLogado);
 				telaEstoque.setVisible(true);
 				dispose();
 			}

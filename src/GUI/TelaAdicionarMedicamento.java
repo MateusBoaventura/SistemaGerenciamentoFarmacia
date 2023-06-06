@@ -4,10 +4,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import com.excript.Farmacia.Estoque;
-
 import excessoes.CadastroInvalido;
 import excessoes.JaCadastrado;
+import main.Main;
 import mercadoria.Medicamento;
 import mercadoria.Produto;
 
@@ -41,7 +40,7 @@ public class TelaAdicionarMedicamento extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaAdicionarMedicamento(Estoque estoque, String funcionarioLogado) {
+	public TelaAdicionarMedicamento(String funcionarioLogado) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 503, 546);
 		contentPane = new JPanel();
@@ -141,7 +140,7 @@ public class TelaAdicionarMedicamento extends JFrame {
 		JButton btnNewButton = new JButton("Voltar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaAdicionarProduto telaProduto = new TelaAdicionarProduto(estoque, funcionarioLogado);
+				TelaAdicionarProduto telaProduto = new TelaAdicionarProduto(Main.ESTOQUE, funcionarioLogado);
                 telaProduto.setVisible(true);
                 dispose();
 			}
@@ -167,14 +166,14 @@ public class TelaAdicionarMedicamento extends JFrame {
 				Produto medicamento = new Medicamento(nome, fabricante, dataFrabricacao, dataValidade, peso, receita, generico);
 				
 				try {
-					estoque.cadastrarProduto(medicamento, cod);
+					Main.ESTOQUE.cadastrarProduto(medicamento, cod);
 					JOptionPane.showMessageDialog(contentPane, "Produto cadastrado!");
 				} catch (JaCadastrado ex) {
 					JOptionPane.showMessageDialog(contentPane,"Erro ao cadastrar o produto, código já cadastrado");
 				}
 				
 				try {
-					estoque.atualizarPreco(cod, preco);
+					Main.ESTOQUE.atualizarPreco(cod, preco);
 				} catch (CadastroInvalido ex) {
 					JOptionPane.showMessageDialog(contentPane,"Erro ao registrar o preço, código inválido");
 				}
