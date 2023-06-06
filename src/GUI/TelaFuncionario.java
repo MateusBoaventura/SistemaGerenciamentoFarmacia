@@ -8,14 +8,14 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Color;
-import javax.swing.JList;
 import javax.swing.JButton;
-import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import com.excript.Farmacia.Estoque;
 
 public class TelaFuncionario extends JFrame {
-
+	
+	private Estoque estoque;
 	/**
 	 * 
 	 */
@@ -62,7 +62,12 @@ public class TelaFuncionario extends JFrame {
 		JButton btnNewButton = new JButton("Estoque");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			}
+				  
+	                TelaEstoque telaEstoque = new TelaEstoque(estoque, funcionarioLogado);
+	                
+	                telaEstoque.setVisible(true);
+	                dispose();
+	            }
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnNewButton.setBounds(133, 119, 122, 63);

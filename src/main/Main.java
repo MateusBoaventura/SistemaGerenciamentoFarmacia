@@ -3,15 +3,16 @@ package main;
 import com.excript.Farmacia.*;
 import excessoes.*;
 import mercadoria.*;
-
+import GUI.*;
+import java.awt.*;
 
 public class Main {
 	public static void main(String [] args) throws JaCadastrado, CadastroInvalido {
 
 		Farmacia farmacia = new Farmacia();
 		Estoque estoque = new Estoque();
-		//Funcionario Mateus = new Funcionario("Mateus", "123");
-		//Funcionario Victor = new Funcionario("Victor", "1234");
+		Funcionario Mateus = new Funcionario("Mateus", "123");
+		Funcionario Victor = new Funcionario("Victor", "1234");		
 		Medicamento alivium = new Medicamento("Alivium", "EmpresaDeMed", "10/03/2020", "11/04/2025", 150, false, false);
 		estoque.cadastrarProduto(alivium, 23918);
 		estoque.atualizarQuantidade(23918, 10);
@@ -60,17 +61,30 @@ public class Main {
 		farmacia.cadastrarCliente(Joao);
 		Cliente Maria = new Cliente("Maria", "91231-9812", "emailMaria@gmail.com", "212.312.321-98", 30);
 		farmacia.cadastrarCliente(Maria);
-		Venda venda = new Venda(Joao);
-		venda.adicionarItem(32312, 1);
-		venda.adicionarItem(99291, 5);
-		System.out.println(venda);
-		System.out.println("");
-		venda.removerItem(32312, 1);
-		System.out.println(venda);
-		farmacia.finalizarVenda(venda, true);
-		System.out.println("");
-		venda.removerItem(99291, 3);
-		System.out.println(venda);
+//		Venda venda = new Venda(Joao);
+//		venda.adicionarItem(32312, 1);
+//		venda.adicionarItem(99291, 5);
+//		System.out.println(venda);
+//		System.out.println("");
+//		venda.removerItem(32312, 1);
+//		System.out.println(venda);
+//		farmacia.finalizarVenda(venda, true);
+//		System.out.println("");
+//		venda.removerItem(99291, 3);
+//		System.out.println(venda);
+		EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    // Criar a instância da tela TelaEstoque
+                    TelaLogin inicio = new TelaLogin();
+
+                    // Tornar a tela visível
+                    inicio.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 		
-	}
 }
