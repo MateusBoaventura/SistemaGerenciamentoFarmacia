@@ -1,6 +1,5 @@
 package GUI;
 
-import java.awt.EventQueue;
 import com.excript.Farmacia.*;
 
 import javax.swing.JFrame;
@@ -19,6 +18,10 @@ import java.awt.event.ActionEvent;
 
 public class TelaListaDeProdutos extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
 	/**
