@@ -14,6 +14,7 @@ public class Main {
 	public static void main(String [] args) throws JaCadastrado, CadastroInvalido {
 
 		Farmacia farmacia = new Farmacia();
+		farmacia.setEstoque(Main.ESTOQUE);
 		//Estoque estoque = new Estoque();		
 		Medicamento alivium = new Medicamento("Alivium", "EmpresaDeMed", "10/03/2020", "11/04/2025", 150, false, false);
 		Main.ESTOQUE.cadastrarProduto(alivium, 23918);
