@@ -7,12 +7,12 @@ import java.util.Scanner;
 
 import excessoes.CadastroInvalido;
 
-public class Venda {
+public class Venda  implements gestorVenda {
 	private Map<Integer, Integer> carrinho;
 	private Cliente cliente;
 	
 	// Construtor
-	public Venda(Cliente cliente) {
+	public Venda(Cliente cliente)	{
 	    this.carrinho = new HashMap<>(); // Inicializa o carrinho como um novo HashMap
 	    this.cliente = cliente; // Atribui o cliente recebido como parâmetro ao atributo cliente da venda
 	}
@@ -99,6 +99,7 @@ public class Venda {
 			this.decida(cliente, estoque);
 			break;
 		case 4:
+			
 			break;
 		default:
 			System.out.println("Erro");
@@ -123,8 +124,8 @@ public class Venda {
 		Scanner scan = new Scanner(System.in);
 		String nomeProduto;
 		int qtd = 0, cod;
-		System.out.println("O que deseja comprar?");
-		System.out.println(estoque.getMercadorias());
+		System.out.println("O que deseja comprar?\n");
+		System.out.println(estoque);
 		do {
 			nomeProduto = scan.nextLine();
 			cod = estoque.buscarProduto(nomeProduto);

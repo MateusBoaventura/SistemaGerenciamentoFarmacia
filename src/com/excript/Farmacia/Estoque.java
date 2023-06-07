@@ -8,7 +8,7 @@ import excessoes.CadastroInvalido;
 import excessoes.JaCadastrado;
 import mercadoria.Produto; 
 
-public class Estoque {
+public class Estoque  implements gestorEstoque {
 	// Criando os Maps para mercadorias, quantidade, preço e nomes
 	private Map<Integer, Produto> mercadorias;
 	private Map<Integer, Integer> quantidade;

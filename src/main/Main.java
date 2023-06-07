@@ -72,6 +72,8 @@ public class Main {
 		System.out.println("");
 		venda.removerItem(99291, 3);
 		System.out.println(venda);
+		venda.decida(Maria, Main.ESTOQUE);
+		System.out.println(venda);
 		EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
@@ -86,5 +88,6 @@ public class Main {
             }
         });
     }
+	
 		
 }
