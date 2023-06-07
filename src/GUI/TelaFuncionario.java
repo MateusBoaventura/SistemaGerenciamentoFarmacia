@@ -83,7 +83,7 @@ public class TelaFuncionario extends JFrame {
 			}
 		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnNewButton_1.setBounds(133, 194, 122, 63);
+		btnNewButton_1.setBounds(133, 188, 122, 63);
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnNewButton_1_1 = new JButton("Exame");
