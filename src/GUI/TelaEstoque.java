@@ -17,15 +17,13 @@ public class TelaEstoque extends JFrame {
 
 	private JPanel contentPane;
 	private static final long serialVersionUID = 1L;
-	private CardLayout cardLayout;
 	
 	/**
 	 * Create the frame.
 	 */
 	public TelaEstoque(Estoque estoque, String funcionarioLogado) {
 		
-		cardLayout = new CardLayout();
-		System.out.println(estoque);
+		System.out.println(Main.ESTOQUE);
 		
 		setTitle("Opções Estoque");
 		setResizable(false);
@@ -35,7 +33,6 @@ public class TelaEstoque extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLocationRelativeTo(null);
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
 
 		JButton btnNewButton_1 = new JButton("Adicionar Produto");
 		btnNewButton_1.addActionListener(new ActionListener() {

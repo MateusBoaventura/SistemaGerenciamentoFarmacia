@@ -45,7 +45,7 @@ public class TelaFuncionario extends JFrame {
 	public TelaFuncionario(String funcionarioLogado) {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 421, 367);
+		setBounds(100, 100, 421, 408);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(233, 238, 243));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -56,7 +56,7 @@ public class TelaFuncionario extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel(funcionarioLogado);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblNewLabel.setBounds(151, 25, 139, 82);
+		lblNewLabel.setBounds(152, 11, 139, 82);
 		contentPane.add(lblNewLabel);
 		
 		JButton btnNewButton = new JButton("Estoque");
@@ -70,12 +70,25 @@ public class TelaFuncionario extends JFrame {
 	            }
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btnNewButton.setBounds(133, 119, 122, 63);
+		btnNewButton.setBounds(133, 104, 122, 63);
 		contentPane.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Venda");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaVenda telaVenda = new TelaVenda(estoque, funcionarioLogado);
+                
+                telaVenda.setVisible(true);
+                dispose();
+			}
+		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnNewButton_1.setBounds(133, 212, 122, 63);
+		btnNewButton_1.setBounds(133, 194, 122, 63);
 		contentPane.add(btnNewButton_1);
+		
+		JButton btnNewButton_1_1 = new JButton("Exame");
+		btnNewButton_1_1.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnNewButton_1_1.setBounds(133, 270, 122, 63);
+		contentPane.add(btnNewButton_1_1);
 	}
 }

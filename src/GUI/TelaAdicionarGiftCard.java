@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import mercadoria.Comida;
+import mercadoria.GiftCard;
 import mercadoria.Produto;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -92,16 +93,17 @@ public class TelaAdicionarGiftCard extends JFrame {
 				String fabricante = textField_1.getText();
 				String dataFrabricacao = textField_2.getText();
 				String dataValidade = textField_6.getText();
-				String descricao = textField_3.getText();
+				float valor = Float.parseFloat(textField_5.getText());
 				int cod = Integer.parseInt(textField_4.getText());
-				float preco = Float.parseFloat(textField_5.getText());
-				float calorias = Float.parseFloat(textField_7.getText());
+				String jogo = textField_7.getText();
+				float preco = Float.parseFloat(textField_3.getText());
 				
-				Produto comida = new Comida(nome, fabricante, dataFrabricacao, dataValidade, calorias, descricao);				
+				Produto giftCard = new GiftCard(nome, fabricante, dataFrabricacao, dataValidade, valor, jogo);				
 				
 				try {
-					Main.ESTOQUE.cadastrarProduto(comida, cod);
+					Main.ESTOQUE.cadastrarProduto(giftCard, cod);
 					JOptionPane.showMessageDialog(contentPane, "Produto cadastrado!");
+					dispose();
 				} catch (JaCadastrado ex) {
 					JOptionPane.showMessageDialog(contentPane,"Erro ao cadastrar o produto, código já cadastrado");
 				}
