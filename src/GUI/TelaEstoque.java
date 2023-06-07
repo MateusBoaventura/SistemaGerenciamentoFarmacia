@@ -2,7 +2,6 @@ package GUI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.CardLayout;
 import java.awt.Font;
 import com.excript.Farmacia.*;
 
@@ -42,8 +41,9 @@ public class TelaEstoque extends JFrame {
 				dispose();
 			}
 		});
+		contentPane.setLayout(null);
 		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btnNewButton_1.setBounds(133, 48, 251, 39);
+		btnNewButton_1.setBounds(150, 69, 239, 39);
 		getContentPane().add(btnNewButton_1);
 
 		JButton btnAtualizarProduto = new JButton("Atualizar/Remover Produto");
@@ -51,6 +51,18 @@ public class TelaEstoque extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				TelaAtualizarRemoverProduto telaAttProd = new TelaAtualizarRemoverProduto(Main.ESTOQUE, funcionarioLogado);
 				telaAttProd.setVisible(true);
+				dispose();
+			}
+		});
+		btnAtualizarProduto.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnAtualizarProduto.setBounds(150, 149, 251, 39);
+		getContentPane().add(btnAtualizarProduto);
+
+		JButton btnListarProdutos = new JButton("Listar Produtos");
+		btnListarProdutos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaListaDeProdutos telaProduto = new TelaListaDeProdutos(Main.ESTOQUE, funcionarioLogado);
+				telaProduto.setVisible(true);
 				dispose();
 			}
 		});
@@ -64,22 +76,10 @@ public class TelaEstoque extends JFrame {
 						dispose();
 					}
 				});
-				btnNewButton_2.setBounds(10, 305, 81, 42);
+				btnNewButton_2.setBounds(18, 279, 92, 39);
 				getContentPane().add(btnNewButton_2);
-		btnAtualizarProduto.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btnAtualizarProduto.setBounds(133, 114, 251, 39);
-		getContentPane().add(btnAtualizarProduto);
-
-		JButton btnListarProdutos = new JButton("Listar Produtos");
-		btnListarProdutos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				TelaListaDeProdutos telaProduto = new TelaListaDeProdutos(Main.ESTOQUE, funcionarioLogado);
-				telaProduto.setVisible(true);
-				dispose();
-			}
-		});
 		btnListarProdutos.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btnListarProdutos.setBounds(133, 178, 250, 39);
+		btnListarProdutos.setBounds(150, 224, 239, 39);
 		getContentPane().add(btnListarProdutos);
 	}
 

@@ -45,7 +45,7 @@ public class TelaFuncionario extends JFrame {
 	public TelaFuncionario(String funcionarioLogado) {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 421, 408);
+		setBounds(100, 100, 396, 434);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(233, 238, 243));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -70,7 +70,7 @@ public class TelaFuncionario extends JFrame {
 	            }
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btnNewButton.setBounds(133, 78, 122, 43);
+		btnNewButton.setBounds(133, 78, 122, 56);
 		contentPane.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Venda");
@@ -83,7 +83,7 @@ public class TelaFuncionario extends JFrame {
 			}
 		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnNewButton_1.setBounds(133, 132, 122, 43);
+		btnNewButton_1.setBounds(133, 166, 122, 104);
 		btnNewButton_1.setBounds(133, 188, 122, 63);
 		contentPane.add(btnNewButton_1);
 		
@@ -108,7 +108,7 @@ public class TelaFuncionario extends JFrame {
 			}
 		});
 		btnNewButton_1_1_1.setFont(new Font("Tahoma", Font.BOLD, 10));
-		btnNewButton_1_1_1.setBounds(133, 240, 122, 43);
+		btnNewButton_1_1_1.setBounds(133, 255, 122, 43);
 		contentPane.add(btnNewButton_1_1_1);
 		
 		JButton btnNewButton_1_1_1_1 = new JButton("Remover Exame");
