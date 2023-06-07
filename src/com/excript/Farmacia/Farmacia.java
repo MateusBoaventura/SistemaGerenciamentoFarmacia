@@ -69,7 +69,7 @@ public class Farmacia {
 	        preco = this.estoque.consultarPreco(codigo); // Consulta o preço do item
 
 	        // Formata a string com as informações do item e adiciona à saída
-	        saida += String.format("%s : %d = [Sem Pontos = %.2f (%.2f Cada)][Com Pontos = %.2f (%.2f Cada)]", this.estoque.getMercadorias().get(codigo).getNome(), clienteQuer, clienteQuer * preco, preco,clienteQuer * preco / 10,preco/10);
+	        saida += String.format("%s : %d = [Sem Pontos = %.2f (%.2f Cada)][Com Pontos = %.2f (%.2f Cada)]", this.estoque.getMercadorias().get(codigo).getNome(), clienteQuer, clienteQuer * preco, preco,clienteQuer * preco-clienteQuer * preco / 10,preco-preco/10);
 	    }
 
 	    return saida; // Retorna a saída contendo as informações do total da venda
