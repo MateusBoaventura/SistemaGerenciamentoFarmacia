@@ -35,19 +35,7 @@ public class TelaEstoque extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLocationRelativeTo(null);
 		setContentPane(contentPane);
-		
-		JButton btnNewButton = new JButton("Remover Produto");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				TelaRemoverProduto telaRemProd = new TelaRemoverProduto(estoque, funcionarioLogado);
-				telaRemProd.setVisible(true);
-				// dispose();
-			}
-		});
 		contentPane.setLayout(null);
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btnNewButton.setBounds(133, 244, 251, 39);
-		getContentPane().add(btnNewButton);
 
 		JButton btnNewButton_1 = new JButton("Adicionar Produto");
 		btnNewButton_1.addActionListener(new ActionListener() {
@@ -61,10 +49,10 @@ public class TelaEstoque extends JFrame {
 		btnNewButton_1.setBounds(133, 48, 251, 39);
 		getContentPane().add(btnNewButton_1);
 
-		JButton btnAtualizarProduto = new JButton("Atualizar Produto");
+		JButton btnAtualizarProduto = new JButton("Atualizar/Remover Produto");
 		btnAtualizarProduto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaAtualizarProduto telaAttProd = new TelaAtualizarProduto(estoque, funcionarioLogado);
+				TelaAtualizarRemoverProduto telaAttProd = new TelaAtualizarRemoverProduto(Main.ESTOQUE, funcionarioLogado);
 				telaAttProd.setVisible(true);
 				dispose();
 			}
@@ -88,7 +76,9 @@ public class TelaEstoque extends JFrame {
 		JButton btnListarProdutos = new JButton("Listar Produtos");
 		btnListarProdutos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// FALTANDO
+				TelaListaDeProdutos telaProduto = new TelaListaDeProdutos(Main.ESTOQUE, funcionarioLogado);
+				telaProduto.setVisible(true);
+				dispose();
 			}
 		});
 		btnListarProdutos.setFont(new Font("Tahoma", Font.BOLD, 15));

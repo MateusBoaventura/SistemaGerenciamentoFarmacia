@@ -26,16 +26,16 @@ public class CadastroDeExames {
 	}
 	
 	// Funcao para remover um exame
-	public void removerExame(Exame exame) {
+	public boolean removerExame(String email) {
 		for (int i = 0; i < listaExame.size(); i++) {
 			Exame compara = listaExame.get(i);
-			if (exame == compara) {
+			Cliente comparaEmail = compara.getCliente();
+			if (email == comparaEmail.getEmail()) {
 				listaExame.remove(compara);
-				System.out.println("Exame removido");
-				break;
+				return true;
 			}
 		}
 		
-		System.out.println("Exame não encontrado");
+		return false;
 	}
 }
