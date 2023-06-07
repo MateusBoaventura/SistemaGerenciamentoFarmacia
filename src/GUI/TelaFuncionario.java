@@ -74,6 +74,14 @@ public class TelaFuncionario extends JFrame {
 		contentPane.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Venda");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaVenda telaVenda = new TelaVenda(estoque, funcionarioLogado);
+                
+                telaVenda.setVisible(true);
+                dispose();
+			}
+		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnNewButton_1.setBounds(133, 212, 122, 63);
 		contentPane.add(btnNewButton_1);

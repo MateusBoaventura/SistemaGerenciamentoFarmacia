@@ -168,6 +168,7 @@ public class TelaAdicionarMedicamento extends JFrame {
 				try {
 					Main.ESTOQUE.cadastrarProduto(medicamento, cod);
 					JOptionPane.showMessageDialog(contentPane, "Produto cadastrado!");
+					dispose();
 				} catch (JaCadastrado ex) {
 					JOptionPane.showMessageDialog(contentPane,"Erro ao cadastrar o produto, código já cadastrado");
 				}

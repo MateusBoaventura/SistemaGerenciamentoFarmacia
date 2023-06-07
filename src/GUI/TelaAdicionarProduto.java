@@ -40,6 +40,7 @@ public class TelaAdicionarProduto extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				TelaAdicionarMedicamento telaMedicamento = new TelaAdicionarMedicamento (funcionarioLogado);
 				telaMedicamento.setVisible(true);
+				dispose();
 			}
 		});
 		contentPane.setLayout(null);
@@ -53,6 +54,7 @@ public class TelaAdicionarProduto extends JFrame {
 				System.out.println("AA");
 				TelaAdicionarCosmetico telaCosmetico = new TelaAdicionarCosmetico(funcionarioLogado);
 				telaCosmetico.setVisible(true);
+				dispose();
 			}
 		});
 		btnAdicionar.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -64,6 +66,7 @@ public class TelaAdicionarProduto extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				TelaAdicionarGiftCard telaGiftCard = new TelaAdicionarGiftCard(funcionarioLogado);
 				telaGiftCard.setVisible(true);
+				dispose();
 			}
 		});
 		btnNewButton_1_1.setFont(new Font("Tahoma", Font.BOLD, 15));

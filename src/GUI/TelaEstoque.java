@@ -17,15 +17,13 @@ public class TelaEstoque extends JFrame {
 
 	private JPanel contentPane;
 	private static final long serialVersionUID = 1L;
-	private CardLayout cardLayout;
 	
 	/**
 	 * Create the frame.
 	 */
 	public TelaEstoque(Estoque estoque, String funcionarioLogado) {
 		
-		cardLayout = new CardLayout();
-		System.out.println(estoque);
+		System.out.println(Main.ESTOQUE);
 		
 		setTitle("Opções Estoque");
 		setResizable(false);
@@ -39,8 +37,8 @@ public class TelaEstoque extends JFrame {
 		JButton btnNewButton = new JButton("Remover Produto");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaRemoverProduto telaRemProd = new TelaRemoverProduto(estoque, funcionarioLogado);
-				telaRemProd.setVisible(true);
+				//TelaRemoverProduto telaRemProd = new TelaRemoverProduto(estoque, funcionarioLogado);
+				//telaRemProd.setVisible(true);
 				// dispose();
 			}
 		});
