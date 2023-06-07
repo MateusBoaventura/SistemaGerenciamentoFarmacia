@@ -1,16 +1,16 @@
 package com.excript.Farmacia;
 
-import java.time.LocalDateTime; // Importando data
+import java.util.Date; // Importando data
 
 public class Exame {
 	// Atributos
     private String tipo;
-    private LocalDateTime horario;
+    private Date horario;
     private double preco;
     private Cliente cliente;
 
     // Construtor
-    public Exame(String tipo, LocalDateTime horario, double preco, Cliente cliente) {
+    public Exame(String tipo, Date horario, double preco, Cliente cliente) {
         this.tipo = tipo;
         this.horario = horario;
         this.preco = preco;
@@ -26,11 +26,11 @@ public class Exame {
         this.tipo = tipo;
     }
 
-    public LocalDateTime getHorario() {
+    public Date getHorario() {
         return horario;
     }
 
-    public void setHorario(LocalDateTime horario) {
+    public void setHorario(Date horario) {
         this.horario = horario;
     }
 

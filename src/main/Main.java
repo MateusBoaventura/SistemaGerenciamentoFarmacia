@@ -8,6 +8,8 @@ import java.awt.*;
 
 public class Main {
 	public static Estoque ESTOQUE = new Estoque();
+	public static Farmacia FARMACIA = new Farmacia();
+	public static CadastroDeExames EXAMES = new CadastroDeExames();
 	
 	public static void main(String [] args) throws JaCadastrado, CadastroInvalido {
 

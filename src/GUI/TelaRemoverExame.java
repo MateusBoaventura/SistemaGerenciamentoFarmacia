@@ -1,74 +1,85 @@
 package GUI;
 
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import main.Main;
+
 import javax.swing.JTextPane;
 import java.awt.Font;
 import java.awt.Color;
-import java.awt.Component;
-
 import javax.swing.JTextField;
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import com.excript.Farmacia.*;
 
-public class TelaRemoverExame extends JPanel {
+public class TelaRemoverExame extends JFrame {
+
+	private JPanel contentPane;
 	private JTextField txtEmail;
-	protected Component contentPane;
 
 	/**
-	 * Create the panel.
+	 * Launch the application.
 	 */
-	public TelaRemoverExame(CadastroDeExames cadastroExame, String funcionarioLogado) {
-		setLayout(null);
+	public static void main(String[] args) {
+			
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public TelaRemoverExame(String funcionarioLogado) {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
 		
 		JTextPane txtpnDigiteOEmail = new JTextPane();
 		txtpnDigiteOEmail.setBackground(new Color(240, 240, 240));
 		txtpnDigiteOEmail.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtpnDigiteOEmail.setText("Digite o email do cliente:");
-		txtpnDigiteOEmail.setBounds(10, 34, 154, 20);
-		add(txtpnDigiteOEmail);
+		txtpnDigiteOEmail.setBounds(10, 45, 154, 20);
+		contentPane.add(txtpnDigiteOEmail);
 		
 		txtEmail = new JTextField();
-		txtEmail.setBounds(10, 65, 430, 20);
-		add(txtEmail);
+		txtEmail.setBounds(10, 76, 414, 20);
+		contentPane.add(txtEmail);
 		txtEmail.setColumns(10);
 		
-		JButton btnNewButton = new JButton("Remover exame");
+		JButton btnNewButton = new JButton("Voltar");
 		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaFuncionario telaFunc = new TelaFuncionario(funcionarioLogado);
+				telaFunc.setVisible(true);
+				dispose();
+			}
+		});
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnNewButton.setBounds(10, 227, 89, 23);
+		contentPane.add(btnNewButton);
+		
+		JButton btnRemover = new JButton("Remover");
+		btnRemover.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String email = txtEmail.getText();
 				
-				if (cadastroExame.removerExame(email)) {
-					
+				if (Main.EXAMES.removerExame(email)) {
+					JOptionPane.showMessageDialog(contentPane,"Exame removido");
 				} else {
 					JOptionPane.showMessageDialog(contentPane,"Erro, exame não encontrado");
 				}
 			}
 		});
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 13));
-		btnNewButton.setBounds(293, 266, 147, 23);
-		add(btnNewButton);
-		
-		JButton btnVoltar = new JButton("Voltar");
-		btnVoltar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				TelaFuncionario telaFuncionario = new TelaFuncionario(funcionarioLogado);
-				telaFuncionario.setVisible(true);
-				dispose();
-			}
-		});
-		btnVoltar.setFont(new Font("Tahoma", Font.BOLD, 13));
-		btnVoltar.setBounds(10, 267, 73, 23);
-		add(btnVoltar);
-
-	}
-
-	protected void dispose() {
-		// TODO Auto-generated method stub
-		
+		btnRemover.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnRemover.setBounds(335, 228, 89, 23);
+		contentPane.add(btnRemover);
 	}
 
 }

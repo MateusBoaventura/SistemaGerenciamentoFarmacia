@@ -70,7 +70,7 @@ public class TelaFuncionario extends JFrame {
 	            }
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btnNewButton.setBounds(133, 104, 122, 63);
+		btnNewButton.setBounds(133, 78, 122, 43);
 		contentPane.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Venda");
@@ -83,12 +83,44 @@ public class TelaFuncionario extends JFrame {
 			}
 		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnNewButton_1.setBounds(133, 132, 122, 43);
 		btnNewButton_1.setBounds(133, 188, 122, 63);
 		contentPane.add(btnNewButton_1);
 		
-		JButton btnNewButton_1_1 = new JButton("Exame");
-		btnNewButton_1_1.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnNewButton_1_1.setBounds(133, 270, 122, 63);
+		JButton btnNewButton_1_1 = new JButton("Cadastrar Cliente");
+		btnNewButton_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaCadastroCliente telaCliente = new TelaCadastroCliente(funcionarioLogado);
+				telaCliente.setVisible(true);
+				dispose();
+			}
+		});
+		btnNewButton_1_1.setFont(new Font("Tahoma", Font.BOLD, 10));
+		btnNewButton_1_1.setBounds(133, 186, 122, 43);
 		contentPane.add(btnNewButton_1_1);
+		
+		JButton btnNewButton_1_1_1 = new JButton("Cadastrar Exame");
+		btnNewButton_1_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaCadastroExame telaExame = new TelaCadastroExame(funcionarioLogado);
+				telaExame.setVisible(true);
+				dispose();
+			}
+		});
+		btnNewButton_1_1_1.setFont(new Font("Tahoma", Font.BOLD, 10));
+		btnNewButton_1_1_1.setBounds(133, 240, 122, 43);
+		contentPane.add(btnNewButton_1_1_1);
+		
+		JButton btnNewButton_1_1_1_1 = new JButton("Remover Exame");
+		btnNewButton_1_1_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaRemoverExame telaRemoveEx = new TelaRemoverExame(funcionarioLogado);
+				telaRemoveEx.setVisible(true);
+				dispose();
+			}
+		});
+		btnNewButton_1_1_1_1.setFont(new Font("Tahoma", Font.BOLD, 10));
+		btnNewButton_1_1_1_1.setBounds(133, 294, 122, 43);
+		contentPane.add(btnNewButton_1_1_1_1);
 	}
 }

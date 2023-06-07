@@ -17,12 +17,13 @@ public class CadastroDeExames {
 	}
 	
 	// Funcao para cadastrar um exame
-	public void cadastraExame(Exame exame) {
+	public boolean cadastraExame(Exame exame) {
 		if (checaHorario(exame)) {
-			System.out.println("O horário não está disponível");
+			return true;
 		} else {
 			listaExame.add(exame);
 		}
+		return false;
 	}
 	
 	// Funcao para remover um exame
